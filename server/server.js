@@ -7,7 +7,7 @@ const cookieSession = require("cookie-session");
 const csurf = require("csurf");
 const { hash, compare } = require("./utils/ bcrypt.js");
 
-const { addUser } = require("./sql/db");
+const { addUser, registeredUser } = require("./sql/db");
 // This is going to min the size of response we send
 app.use(compression());
 // We are servering our public directory
@@ -30,7 +30,7 @@ app.use(
 // });
 
 // csurf MUST come after cookieSession
-// This will prevent clickJacking
+// This will prevent clickJacking(csrf attack)
 app.use(csurf()); // looking for the every request and look at the csurf token and if the valid token
 app.use(function (req, res, next) {
     // this prevents clicking jacking
@@ -84,9 +84,15 @@ app.post("/welcome", (req, res) => {
         .catch((error) => {
             console.log(error);
             res.status(500).json({
-                error: "Error in /registration routing..!",
+                error: "Error in /registration roue, Please check the route..!",
             });
         });
+});
+
+
+
+app.post("/login", (req, res) => {
+    console.log("POST req to /login page was made");
 });
 
 app.get("*", function (req, res) {
