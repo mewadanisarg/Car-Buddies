@@ -2,36 +2,35 @@ import React from "react";
 import { Link } from "react-router-dom";
 import axios from "./axios";
 
-export default class Registration extends React.Component {
+export default class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
     }
     handleChange({ target }) {
-        // console.log(target.name);
-        // console.log(target.value);
         this.setState({
             [target.name]: target.value,
         });
     }
-    submit(event) {
+    login(event) {
         console.log("Submit button was clicked and it is working good..!");
         event.preventDefault();
-        this.setState({
-            error: null,
-        });
         axios
-            .post("/registration", {
-                first: this.state.first,
-                last: this.state.last,
+            .post("/login", {
                 email: this.state.email,
                 password: this.state.password,
             })
-            .then(() => {
-                location.replace("/");
+            .then(({ data }) => {
+                if (data.success) {
+                    location.replace("/");
+                } else {
+                    this.setState({
+                        error: true,
+                    });
+                }
             })
             .catch((error) => {
-                console.log("Error in AXIOS POST /registration route:", error);
+                console.log("Error in AXIOS POST /login route:", error);
                 this.setState({
                     error: "Something ent wrong, Please try again.!",
                 });
@@ -39,7 +38,7 @@ export default class Registration extends React.Component {
     }
 
     render() {
-        console.log("/Registration Working..! ");
+        console.log("Login.js route is working");
         return (
             <form>
                 <div className="flex flex-direction-column ">
@@ -48,18 +47,6 @@ export default class Registration extends React.Component {
                             Oops! Somwthing went wrong.! Please try again
                         </div>
                     )}
-                    <label>First name</label>
-                    <input
-                        name="first"
-                        required
-                        onChange={(e) => this.handleChange(e)}
-                    />
-                    <label>Last name</label>
-                    <input
-                        name="last"
-                        required
-                        onChange={(e) => this.handleChange(e)}
-                    />
                     <label>Email</label>
                     <input
                         name="email"
@@ -74,13 +61,17 @@ export default class Registration extends React.Component {
                         required
                         onChange={(e) => this.handleChange(e)}
                     />
-                    <button onClick={(e) => this.submit(e)}>submit</button>
+                    <button onClick={() => this.login}>login</button>
                     <div>
-                        <span>Already a member?</span>
-                        <Link to="/login" className="login-route" href="#">
-                            Login
+                        <Link
+                            to="/password/reset"
+                            className="login-route"
+                            href="#"
+                        >
+                            Reset Password
                         </Link>
                     </div>
+                    <Link to="/">Sign up</Link>
                 </div>
             </form>
         );
