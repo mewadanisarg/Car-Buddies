@@ -33,56 +33,54 @@ export default class Registration extends React.Component {
             .catch((error) => {
                 console.log("Error in AXIOS POST /registration route:", error);
                 this.setState({
-                    error: "Something ent wrong, Please try again.!",
+                    error: "Something went wrong, Please try again.!",
                 });
             });
     }
 
     render() {
-        console.log("/Registration Working..! ");
+        // console.log("/Registration Working..! ");
         return (
-            <form>
-                <div className="flex flex-direction-column ">
-                    {this.state.error && (
-                        <div className="error">
-                            Oops! Somwthing went wrong.! Please try again
-                        </div>
-                    )}
-                    <label>First name</label>
-                    <input
-                        name="first"
-                        required
-                        onChange={(e) => this.handleChange(e)}
-                    />
-                    <label>Last name</label>
-                    <input
-                        name="last"
-                        required
-                        onChange={(e) => this.handleChange(e)}
-                    />
-                    <label>Email</label>
-                    <input
-                        name="email"
-                        type="email"
-                        required
-                        onChange={(e) => this.handleChange(e)}
-                    />
-                    <label>Password</label>
-                    <input
-                        name="pass"
-                        type="password"
-                        required
-                        onChange={(e) => this.handleChange(e)}
-                    />
-                    <button onClick={(e) => this.submit(e)}>submit</button>
-                    <div>
-                        <span>Already a member?</span>
-                        <Link to="/login" className="login-route" href="#">
-                            Login
-                        </Link>
+            <div className="flex flex-direction-column  ">
+                {this.state.error && (
+                    <div className="error">
+                        Oops! Somwthing went wrong.! Please try it again
                     </div>
+                )}
+                <label>First name</label>
+                <input
+                    name="first"
+                    required
+                    onChange={(e) => this.handleChange(e)}
+                />
+                <label>Last name</label>
+                <input
+                    name="last"
+                    required
+                    onChange={(e) => this.handleChange(e)}
+                />
+                <label>Email</label>
+                <input
+                    name="email"
+                    type="email"
+                    required
+                    onChange={(e) => this.handleChange(e)}
+                />
+                <label>Password</label>
+                <input
+                    name="password"
+                    type="password"
+                    required
+                    onChange={(e) => this.handleChange(e)}
+                />
+                <button onClick={(e) => this.submit(e)}>submit</button>
+                <div>
+                    <span>Already a member?</span>
+                    <Link to="/login" className="login-route" href="#">
+                        Login
+                    </Link>
                 </div>
-            </form>
+            </div>
         );
     }
 }

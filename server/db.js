@@ -30,9 +30,19 @@ module.exports.registeredUser = (email) => {
 
 module.exports.updateUserInfo = (hash_password, email) => {
     console.log("Inside updateUserInfo db.js :", hash_password, email);
-    const q = `UPDATE users SET hash_password = $1 WHERE email = $1 RETURNING *`;
+    const q = `UPDATE users SET hash_password = $1 WHERE email = $2 RETURNING *`;
     const params = [hash_password, email];
     return db.query(q, params);
+};
+
+module.exports.getUserInfo = (userId) => {
+    return db.query(
+        `
+            SELECT * FROM users
+            WHERE id = $1
+        `,
+        [userId]
+    );
 };
 
 module.exports.insertValidationCode = (code, email) => {
