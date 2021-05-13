@@ -14,9 +14,11 @@ const {
     insertValidationCode,
     selectCode,
     getUserInfo,
+    uploadProfilePic,
+    updateUserBio,
 } = require("./db");
-// const s3 = require("./s3");
-// const { s3Url } = require("./config.json");
+const s3 = require("../s3");
+const { s3Url } = require("../config.json");
 const multer = require("multer"); // This talk with harddrive for uploading the file
 const uidSafe = require("uid-safe");
 // Setting up cookie parser
@@ -250,10 +252,58 @@ app.post("/password/reset/verify", (req, res) => {
         });
 });
 
-// // Image POST route
-// app.post("/upload", uploader.single("file"), upload, (req, res) => {
-//     console.log(req.body);
-// });
+// Image POST route
+app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
+    console.log(" POST req to /upload is working..!");
+    console.log(req.body);
+    console.log("req.file:", req.file);
+    if (req.file) {
+        const { userId } = req.session;
+        const { filename } = req.file;
+        const fullUrl = s3Url + filename;
+        console.log("fullUrl:", fullUrl);
+        uploadProfilePic(fullUrl, userId)
+            .then(({ rows }) => {
+                console.log(("rows:", rows));
+                res.json(rows[0]);
+            })
+            .catch((error) => {
+                console.log("Error in uploadProfilePic ", error);
+                res.status(500).json({
+                    error: "Error in /upload route, please check.",
+                });
+            });
+    } else {
+        res.json({
+            success: false,
+        });
+    }
+});
+
+app.get("/user", (req, res) => {
+    const { userId } = req.session;
+    getUserInfo(userId)
+        .then((response) => {
+            console.log("rows", response.rows);
+            res.json(response.rows[0]);
+        })
+        .catch((error) => console.log("Error:", error));
+});
+
+app.post("/update-UserBio", (req, res) => {
+    console.log("a POST req was made to /update-UserBio route.!");
+    console.log("req.body: ", req.body);
+    console.log("req.session: ", req.session);
+    const { bio } = req.body;
+    const { userId } = req.session;
+    updateUserBio(bio, userId)
+        .then((response) => {
+            res.json(response.rows[0]);
+        })
+        .catch((error) => {
+            console.log("Error in update-UserBio:", error);
+        });
+});
 
 app.get("*", function (req, res) {
     if (!req.session.userId) {

@@ -1,8 +1,13 @@
-export default function ProfilePic(props) {
+export default function ProfilePic({ first, last, imgUrl, toggleUploader }) {
     return (
-        <div>
+        <div className="flex flex-direction-column justify-content-center align-items">
             <h2>Hello this my profilepic component</h2>
-            <img></img>
+            <img
+                className="profile-photo"
+                alt={`${first} ${last}`}
+                onClick={toggleUploader}
+                src={imgUrl}
+            ></img>
         </div>
     );
 }

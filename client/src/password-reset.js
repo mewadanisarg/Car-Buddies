@@ -151,6 +151,15 @@ export default class PasswordReset extends Component {
             <>
                 {/*calling our method to figure out which view we should render*/}
                 {this.determineViewToRender()}
+                <div>
+                    <Link
+                        to="/login"
+                        className="flex flex-direction-column align-items"
+                        href="#"
+                    >
+                        Login
+                    </Link>
+                </div>
             </>
         );
     }

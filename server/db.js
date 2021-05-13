@@ -62,3 +62,24 @@ module.exports.selectCode = (email) => {
     const params = [email];
     return db.query(q, params);
 };
+
+module.exports.getUserInfo = (userId) => {
+    console.log("Inside module.exports.getUserInfo: ", userId);
+    const q = `SELECT * FROM users WHERE id = $1`;
+    const params = [userId];
+    return db.query(q, params);
+};
+
+module.exports.uploadProfilePic = (imgUrl, userId) => {
+    console.log("Inside module.exports.uploadImage:", imgUrl, userId);
+    const q = `UPDATE users SET img_url = $1 WHERE id = $2 RETURNING *`;
+    const params = [imgUrl, userId];
+    return db.query(q, params);
+};
+
+module.exports.updateUserBio = (biotext, userId) => {
+    console.log("Inside module.exports.updateUserBio: ", biotext, userId);
+    const q = `UPDATE users SET bio = $1 WHERE id = $2 RETURNING *`;
+    const params = [biotext, userId];
+    return db.query(q, params);
+};
