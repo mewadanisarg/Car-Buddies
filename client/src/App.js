@@ -12,7 +12,8 @@ export default class App extends React.Component {
             uploaderIsVisible: false,
         };
         this.toggleUploader = this.toggleUploader.bind(this);
-        this.componentDidMount = this.componentDidMount.bind(this);
+        // this.componentDidMount = this.componentDidMount.bind(this);
+        this.updateProfilephoto = this.updateProfilephoto.bind(this);
     }
     componentDidMount() {
         console.log("App Just Mounted..! ");
@@ -56,18 +57,18 @@ export default class App extends React.Component {
                         userId={this.state.userId}
                         first={this.state.first}
                         last={this.state.last}
-                        imgUrl={"/default-user.png"}
+                        imgUrl={this.state.imgUrl || "/default-user.png"}
                     />
                     <ProfilePic
                         userId={this.state.userId}
                         first={this.state.first}
                         last={this.state.last}
-                        imgUrl={"/default-user.png"}
+                        imgUrl={this.state.imgUrl || "/default-user.png"}
                         toggleUploader={this.toggleUploader}
                     />
                     {this.state.uploaderIsVisible && (
                         <Uploader
-                            updateProfilePic={this.updateProfilePic}
+                            updateProfilephoto={this.updateProfilephoto}
                             toggleUploader={this.toggleUploader}
                         />
                     )}

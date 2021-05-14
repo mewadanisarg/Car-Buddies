@@ -11,19 +11,26 @@ export default class Uploader extends Component {
     }
 
     handleChange({ target }) {
+        console.log("Handle Changed", target);
         this.setState({
-            [target.name]: target.value,
+            [target.name]: target.files[0],
         });
     }
     submitFile(e) {
+        console.log("Upload submit was clicked..! Woho");
         e.preventDefault();
-        var formData = new FormData(); // we are var it with defining bcoz it is from browser
-        formData.append("file", this.file);
+        console.log("This.state.file: ", this.state.file);
+        var formData = new FormData();
+        /**
+         * ! we are using var it with defining bcoz it is from browser
+         */
+        formData.append("file", this.state.file);
         axios
             .post("/upload", formData)
             .then((response) => {
                 console.log("response received from server!!");
-                this.props.updateProfile(response.data);
+                console.log("response.data:", response.data);
+                this.props.updateProfilephoto(response.data.imgUrl);
             })
             .catch((error) => {
                 console.log(("error in POST /upload routes:", error));
