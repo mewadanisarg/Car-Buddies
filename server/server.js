@@ -17,6 +17,8 @@ const {
     uploadProfilePic,
     updateUserBio,
     getOtherUserProfile,
+    getNewlyAddedUser,
+    getUsersByName,
 } = require("./db");
 const s3 = require("../s3");
 const { s3Url } = require("../config.json");
@@ -331,6 +333,44 @@ app.get("/other-user/:id", async (req, res) => {
     } catch (error) {
         console.log("Error in getOtherUserProfile route:", error);
     }
+});
+
+// Find new people and display recently added users limited 3
+app.get("/find/users.json", async (req, res) => {
+    console.log("A GET req was made from /find/user route");
+    try {
+        const { rows } = await getNewlyAddedUser();
+        console.log("app.get for finding users: ", rows);
+        res.json(rows);
+    } catch (error) {
+        res.status(500).json({
+            error: "Error GET route of finding users data in server",
+        });
+    }
+});
+
+app.post("/find/users.json", async (req, res) => {
+    console.log("A POST req made to /find/users ");
+    const { searchField } = req.body;
+    console.log("searchField: ", searchField);
+    try {
+        const { rows } = await getUsersByName(searchField);
+        console.log("{rows} : ", rows);
+        res.json(rows);
+    } catch (error) {
+        console.log(
+            "Error in POST route in finding users data in server",
+            error
+        );
+        res.status(500).json({
+            error: "Error in POST /find/users.json",
+        });
+    }
+});
+
+app.get("/logout", (req, res) => {
+    req.session = null;
+    res.redirect("/welcome");
 });
 
 app.get("*", function (req, res) {

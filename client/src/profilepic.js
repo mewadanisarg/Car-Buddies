@@ -5,7 +5,7 @@ export default function ProfilePic({ first, last, imgUrl, toggleUploader }) {
                 className="profile-small-photo"
                 alt={`${first} ${last}`}
                 onClick={toggleUploader}
-                src={imgUrl}
+                src={imgUrl || "/default-user.png"}
             ></img>
         </div>
     );

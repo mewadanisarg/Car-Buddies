@@ -30,22 +30,19 @@ export default class OtherProfile extends React.Component {
     render() {
         console.log("Render Method OtherProfile: ", this.state);
         return (
-            <>
-                <div>
-                    {this.state && (
-                        <p>User Idenfication {this.props.match.params.id}</p>
-                    )}
-                    <img
-                        src={this.state.imgUrl}
-                        alt={`${this.state.first} ${this.state.last}`}
-                    />
-                    <h4>
-                        {" "}
-                        {this.state.first} {this.state.last}
-                        <p>{this.state.bio}</p>
-                    </h4>
-                </div>
-            </>
+            <div>
+                {this.state && (
+                    <>
+                        <h3>Hi, {`${this.state.fisrt} ${this.state.last}`}</h3>
+                        <img
+                            src={this.state.imgUrl}
+                            alt={`${this.state.first} ${this.state.last}`}
+                        />
+                        <h4> {this.state.bio} </h4>
+                    </>
+                )}
+                <link to={"/find/users"}>Search users</link>
+            </div>
         );
     }
 }

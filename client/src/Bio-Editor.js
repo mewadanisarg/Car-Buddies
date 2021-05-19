@@ -12,8 +12,8 @@ export default class BioEditor extends Component {
         this.toggleTextArea = this.toggleTextArea.bind(this);
     }
     componentDidMount() {
-        console.log("BioEditior Mounted..!");
-        console.log("BioEditior Props: ", this.props);
+        //console.log("BioEditior Mounted..!");
+        //console.log("BioEditior Props: ", this.props);
     }
     handleBioChange({ target }) {
         console.log("target.name: ", target.name);

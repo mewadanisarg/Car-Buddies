@@ -6,6 +6,7 @@ import ProfilePic from "./profilepic";
 import axios from "./axios";
 import Profile from "./profile";
 import OtherProfile from "./other-profile";
+import FindPeople from "./find-people";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -20,7 +21,7 @@ export default class App extends React.Component {
         this.setbio = this.setbio.bind(this);
     }
     componentDidMount() {
-        console.log("App Just Mounted..! ");
+        //console.log("App Just Mounted..! ");
         axios
             .get("/user")
             .then((response) => {
@@ -98,6 +99,10 @@ export default class App extends React.Component {
                                 <Route
                                     path="/user/:id"
                                     component={OtherProfile}
+                                />
+                                <Route
+                                    path="/find/users"
+                                    component={FindPeople}
                                 />
                             </div>
                         </BrowserRouter>

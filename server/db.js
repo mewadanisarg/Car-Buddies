@@ -63,6 +63,7 @@ module.exports.selectCode = (email) => {
     return db.query(q, params);
 };
 
+// Fetching the user Id
 module.exports.getUserInfo = (userId) => {
     console.log("Inside module.exports.getUserInfo: ", userId);
     const q = `SELECT * FROM users WHERE id = $1`;
@@ -70,6 +71,7 @@ module.exports.getUserInfo = (userId) => {
     return db.query(q, params);
 };
 
+// Updating the profile pic of the user
 module.exports.uploadProfilePic = (imgUrl, userId) => {
     console.log("Inside module.exports.uploadImage:", imgUrl, userId);
     const q = `UPDATE users SET img_url = $1 WHERE id = $2 RETURNING *`;
@@ -77,6 +79,7 @@ module.exports.uploadProfilePic = (imgUrl, userId) => {
     return db.query(q, params);
 };
 
+// Updating the Bio information of the user who is logged in
 module.exports.updateUserBio = (biotext, userId) => {
     console.log("Inside module.exports.updateUserBio: ", biotext, userId);
     const q = `UPDATE users SET bio = $1 WHERE id = $2 RETURNING *`;
@@ -84,9 +87,25 @@ module.exports.updateUserBio = (biotext, userId) => {
     return db.query(q, params);
 };
 
+// See Other Users Information
 module.exports.getOtherUserProfile = (OthersId) => {
     console.log("Inside module.exports.getOtherUserProfile: ", OthersId);
     const q = `SELECT first_name, last_name, bio, img_url FROM users WHERE id = $1`;
     const params = [OthersId];
+    return db.query(q, params);
+};
+
+// See the newly added user limited to 3 users at time
+module.exports.getNewlyAddedUser = () => {
+    console("Inside module.exports.newlyAddedUser:");
+    const q = `SELECT * FROM users ORDER BY id DESC LIMIT 3`;
+    const params = [];
+    return db.query(q, params);
+};
+
+module.exports.getUsersByName = (nameSearch) => {
+    console.log("module.exports.getUsersByName:", nameSearch);
+    const q = `SELECT * FROM users WHERE first_name ILIKE $1`;
+    const params = [nameSearch + "%"];
     return db.query(q, params);
 };
