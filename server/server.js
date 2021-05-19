@@ -16,6 +16,7 @@ const {
     getUserInfo,
     uploadProfilePic,
     updateUserBio,
+    getOtherUserProfile,
 } = require("./db");
 const s3 = require("../s3");
 const { s3Url } = require("../config.json");
@@ -303,6 +304,33 @@ app.post("/update-UserBio", (req, res) => {
         .catch((error) => {
             console.log("Error in update-UserBio:", error);
         });
+});
+
+//Other-Profile Get route
+
+app.get("/other-user/:id", async (req, res) => {
+    console.log("a GET req was made to /other-user/:id route");
+    console.log("req.params:", req.params);
+    const { id } = req.params;
+    console.log("A GET req was made to id for other users:", id);
+    if (parseInt(id) === req.session.userId) {
+        res.status(400).json({
+            error: "Cannot access your own url",
+        });
+        return;
+    }
+    try {
+        const { rows } = await getOtherUserProfile(id);
+        if (rows.length === 0) {
+            res.status(400).json({
+                error: "Please check the written url, it does not exist",
+            });
+            return;
+        }
+        res.json(rows[0]);
+    } catch (error) {
+        console.log("Error in getOtherUserProfile route:", error);
+    }
 });
 
 app.get("*", function (req, res) {

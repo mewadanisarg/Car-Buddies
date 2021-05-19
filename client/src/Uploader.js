@@ -7,7 +7,7 @@ export default class Uploader extends Component {
         this.state = {};
     }
     componentDidMount() {
-        console.log("Uploader just mounted!", this.props);
+        // console.log("Uploader just mounted!", this.props);
     }
 
     handleChange({ target }) {

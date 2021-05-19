@@ -83,3 +83,10 @@ module.exports.updateUserBio = (biotext, userId) => {
     const params = [biotext, userId];
     return db.query(q, params);
 };
+
+module.exports.getOtherUserProfile = (OthersId) => {
+    console.log("Inside module.exports.getOtherUserProfile: ", OthersId);
+    const q = `SELECT first_name, last_name, bio, img_url FROM users WHERE id = $1`;
+    const params = [OthersId];
+    return db.query(q, params);
+};
