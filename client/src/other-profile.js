@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import axios from "./axios";
 
 export default class OtherProfile extends React.Component {
     constructor() {
@@ -15,7 +15,7 @@ export default class OtherProfile extends React.Component {
         try {
             const { data } = await axios.get(`/other-user/${id}`);
             console.log("Data from OtherProfile Get req:", data);
-            this.state({
+            this.setState({
                 first: data.first_name,
                 last: data.last_name,
                 imgUrl: data.img_url,
@@ -23,7 +23,7 @@ export default class OtherProfile extends React.Component {
             });
             console.log("this.state:", this.state);
         } catch (error) {
-            console.log("Error is ComponentDidMount of OtherProfile:");
+            console.log("Error is ComponentDidMount of OtherProfile:", error);
             this.props.history.push("/");
         }
     }
@@ -41,7 +41,7 @@ export default class OtherProfile extends React.Component {
                     />
                     <h4>
                         {" "}
-                        {this.state.first} {this.state.last}^
+                        {this.state.first} {this.state.last}
                         <p>{this.state.bio}</p>
                     </h4>
                 </div>

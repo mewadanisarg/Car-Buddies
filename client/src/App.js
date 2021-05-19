@@ -79,7 +79,7 @@ export default class App extends React.Component {
                     />
                     {
                         <BrowserRouter>
-                            <div>
+                            <div className="app-profile-container">
                                 <Route
                                     exact
                                     path="/"
