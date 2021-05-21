@@ -97,15 +97,61 @@ module.exports.getOtherUserProfile = (OthersId) => {
 
 // See the newly added user limited to 3 users at time
 module.exports.getNewlyAddedUser = () => {
-    console("Inside module.exports.newlyAddedUser:");
+    console.log("Inside module.exports.newlyAddedUser:");
     const q = `SELECT * FROM users ORDER BY id DESC LIMIT 3`;
     const params = [];
     return db.query(q, params);
 };
 
 module.exports.getUsersByName = (nameSearch) => {
-    console.log("module.exports.getUsersByName:", nameSearch);
+    console.log("Inside module.exports.getUsersByName:", nameSearch);
     const q = `SELECT * FROM users WHERE first_name ILIKE $1`;
     const params = [nameSearch + "%"];
+    return db.query(q, params);
+};
+
+// Part 8 for frienship connection
+
+module.exports.getConnected = (loggedInUser, connectingUser) => {
+    console.log(
+        "Inside module.exports.getConnected: ",
+        loggedInUser,
+        connectingUser
+    );
+    const q = `SELECT * FROM friendships WHERE (recipient_id = $1 AND sender_id = $2) OR (recipient_id =$2 AND sender_id=$1)`;
+    const params = [loggedInUser, connectingUser];
+    return db.query(q, params);
+};
+
+module.exports.addConnection = (loggedInUser, connectingUser) => {
+    console.log(
+        "Inside module.exports.addConnection: ",
+        loggedInUser,
+        connectingUser
+    );
+    const q = `INSERT INTO friendships (sender_id, recipient_id) VALUES ($1, $2) RETURNING *`;
+    const params = [loggedInUser, connectingUser];
+    return db.query(q, params);
+};
+
+module.exports.updateConnection = (loggedInUser, connectingUser) => {
+    console.log(
+        "Inside module.exports.updateConnection: ",
+        loggedInUser,
+        connectingUser
+    );
+    const q = `UPDATE friendships SET accepted = true WHERE recipient_id = $1 AND sender_id = $2 RETURNING *`;
+    const params = [loggedInUser, connectingUser];
+    return db.query(q, params);
+};
+
+module.exports.unfriendConnection = (loggedInUser, connectingUser) => {
+    console.log(
+        "Inside module.exports.unfriendConnection",
+        loggedInUser,
+        connectingUser
+    );
+    const q = `DELETE FROM friendships WHERE (recipient_id = $1 AND sender_id = $2) OR (recipient_id =$2 AND sender_id=$1)`;
+    const params = [loggedInUser, connectingUser];
     return db.query(q, params);
 };

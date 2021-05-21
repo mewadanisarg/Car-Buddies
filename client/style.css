@@ -67,8 +67,8 @@ form {
 }
 
 img {
-    width: 250px;
-    height: 250px;
+    width: 150px;
+    height: 150px;
     border-radius: 10px;
 }
 
@@ -79,7 +79,28 @@ footer {
     left: 10px;
 }
 
-.profile-photo {
-    width: 50px;
-    height: 50px;
+.main-app-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+
+.large-profile-photo {
+    width: 100px;
+    height: 100px;
+
+}
+.profile-small-photo {
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }

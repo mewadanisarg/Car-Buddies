@@ -19,11 +19,16 @@ const {
     getOtherUserProfile,
     getNewlyAddedUser,
     getUsersByName,
+    getConnected,
+    addConnection,
+    updateConnection,
+    unfriendConnection,
 } = require("./db");
 const s3 = require("../s3");
 const { s3Url } = require("../config.json");
 const multer = require("multer"); // This talk with harddrive for uploading the file
 const uidSafe = require("uid-safe");
+
 // Setting up cookie parser
 app.use(
     cookieSession({
@@ -340,9 +345,10 @@ app.get("/find/users.json", async (req, res) => {
     console.log("A GET req was made from /find/user route");
     try {
         const { rows } = await getNewlyAddedUser();
-        console.log("app.get for finding users: ", rows);
+        console.log("app.get for finding users: ", rows.length);
         res.json(rows);
     } catch (error) {
+        console.log("Inside Catch of GET req of /find/users", error);
         res.status(500).json({
             error: "Error GET route of finding users data in server",
         });
@@ -368,6 +374,75 @@ app.post("/find/users.json", async (req, res) => {
     }
 });
 
+// Part 8 for friendship button..!
+
+app.get("/friendsconnection/:connectingUser", async (req, res) => {
+    const loggedInUser = req.session.userId;
+    console.log("loggedInUser:", req.session.userId);
+    const { connectingUser } = req.params;
+    console.log("Connecting to user:", req.params);
+    const { rows } = await getConnected(loggedInUser, connectingUser);
+    if (rows.length === 0) {
+        return res.json({
+            btnText: "Add Friend",
+        });
+    }
+    if (rows[0].accepted) {
+        return res.json({
+            btnText: "Unfriend",
+        });
+    }
+    if (!rows[0].accepted) {
+        if (rows.recipient_id === loggedInUser) {
+            return res.json({
+                btnText: "Accept request",
+            });
+        } else {
+            return res.json({
+                btnText: "Cancel request",
+            });
+        }
+    }
+});
+
+app.post("/friendsconnection", async (req, res) => {
+    const loggedInUser = req.session.userId;
+    const { btnText, connectingUser } = req.body;
+    console.log("loggedInuser : ", req.session.userId);
+    console.log("req.body: ", req.body);
+
+    try {
+        if (btnText === "Add Friend") {
+            await addConnection(loggedInUser, connectingUser);
+            return res.json({
+                btnText: "Cancel request",
+            });
+        }
+        if (btnText === "Accept request") {
+            await updateConnection(loggedInUser, connectingUser);
+            return res.json({
+                btnText: "Unfriend",
+            });
+        }
+        if (
+            btnText === "Cancel request" ||
+            btnText === "Unfriend" ||
+            btnText === "Decline request"
+        ) {
+            await unfriendConnection(loggedInUser, connectingUser);
+            return req.json({
+                btnText: "Add Friend",
+            });
+        }
+    } catch (error) {
+        console.log("Error in app.post /friendship route: ", error);
+        return res.json({
+            error: "Error in friends-btn route",
+        });
+    }
+});
+
+// Logout route
 app.get("/logout", (req, res) => {
     req.session = null;
     res.redirect("/welcome");

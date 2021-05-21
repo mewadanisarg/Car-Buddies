@@ -5,9 +5,9 @@ import BioEditor from "./Bio-Editor";
 export default function Profile(props) {
     //console.log("props in Profile:", props);
     return (
-        <div>
+        <div className="profile-container">
             <ProfilePic
-                className="large-profilephoto"
+                className="large-profile-photo"
                 first={props.first}
                 last={props.last}
                 imgUrl={props.imgUrl}

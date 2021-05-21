@@ -34,11 +34,11 @@ export default class App extends React.Component {
                         imgUrl: response.data.img_url,
                         bio: response.data.bio,
                     },
-                    () =>
-                        console.log(
-                            "this.state in app after adding info: ",
-                            this.state
-                        )
+                    // () =>
+                    //     console.log(
+                    //         "this.state in app after adding info: ",
+                    //         this.state
+                    //     )
                 );
             })
             .catch((error) => console.log("error: ", error));
@@ -70,7 +70,7 @@ export default class App extends React.Component {
                 <header>
                     <Logo />
                 </header>
-                <div className="main-container flex flex-direction-column justify-content-center align-items">
+                <div className="main-app-container">
                     <ProfilePic
                         userId={this.state.userId}
                         first={this.state.first}
@@ -89,7 +89,10 @@ export default class App extends React.Component {
                                             userId={this.state.userId}
                                             first={this.state.first}
                                             last={this.state.last}
-                                            imgUrl={this.state.imgUrl}
+                                            imgUrl={
+                                                this.state.imgUrl ||
+                                                "/default-user.png"
+                                            }
                                             onClick={this.showUploader}
                                             bio={this.state.bio}
                                             setbio={this.setbio}
