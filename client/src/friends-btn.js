@@ -48,7 +48,7 @@ export default function FriendsButton({ id }) {
             <button className="friends-btn" onClick={handleAddFriend}>
                 {buttonText}
             </button>
-            {buttonText === "Aceept request" && (
+            {buttonText === "Accept request" && (
                 <button onClick={handleDecline}>Decline request</button>
             )}
         </>

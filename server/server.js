@@ -382,6 +382,7 @@ app.get("/friendsconnection/:connectingUser", async (req, res) => {
     const { connectingUser } = req.params;
     console.log("Connecting to user:", req.params);
     const { rows } = await getConnected(loggedInUser, connectingUser);
+    console.log("Rows into /friendsconnection/:connectingUser", rows);
     if (rows.length === 0) {
         return res.json({
             btnText: "Add Friend",
@@ -393,7 +394,7 @@ app.get("/friendsconnection/:connectingUser", async (req, res) => {
         });
     }
     if (!rows[0].accepted) {
-        if (rows.recipient_id === loggedInUser) {
+        if (rows[0].recipient_id === loggedInUser) {
             return res.json({
                 btnText: "Accept request",
             });

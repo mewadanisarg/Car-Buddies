@@ -5,18 +5,17 @@
 }
 
 body {
-    background: #36d1dc;
-    background: -webkit-linear-gradient(to top, #5b86e5, #36d1dc);
-    background: linear-gradient(to top, #5b86e5, #36d1dc);
+    background: whitesmoke;
     height: 100vh;
+    font-family: "Padauk", sans-serif;
 }
 
 button {
     background-image: linear-gradient(
         to right,
-        #37505f 0%,
-        #26a0da 51%,
-        #314755 100%
+        #ec8f6a 0%,
+        #da5926 51%,
+        #ec8f6a 100%
     );
     margin: 10px;
     padding: 15px 45px;
@@ -24,7 +23,9 @@ button {
     text-transform: uppercase;
     transition: 0.5s;
     background-size: 200% auto;
-    color: white;
+    color: rgb(245, 237, 237);
+    font-size: 18px;
+    font-weight: 400;
     box-shadow: 0 0 20px #eee;
     border-radius: 10px;
     display: block;
@@ -32,7 +33,7 @@ button {
 
 button:hover {
     background-position: right center; /* change the direction of the change here */
-    color: #fff;
+    color: rgb(17, 17, 17);
     text-decoration: none;
 }
 
@@ -43,8 +44,33 @@ button:hover {
 form {
     display: flex;
     justify-content: center;
-    /* align-items: center; */
-    height: 71.8vh;
+}
+
+.registration {
+    border: 2px solid;
+    border-radius: 10px;
+    padding: 30px;
+    margin-top: 10px;
+}
+.registration-input {
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5px;
+    align-items: center;
+}
+
+.login-page {
+    border: 2px solid;
+    border-radius: 10px;
+    padding: 30px;
+    margin-top: 10px;
+}
+
+.login-input{
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5px;
+    align-items: center;
 }
 
 .flex {
@@ -79,23 +105,20 @@ footer {
     left: 10px;
 }
 
-.main-app-container{
+.main-app-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
-
 }
 .profile-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    
 }
 
 .large-profile-photo {
     width: 100px;
     height: 100px;
-
 }
 .profile-small-photo {
     width: 70px;

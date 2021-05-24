@@ -3,17 +3,16 @@ import Registration from "./registration";
 import Login from "./login.js";
 import PasswordReset from "./password-reset";
 
-
 export default function Welcome() {
     return (
         <div
             id="welcome"
             className="welcome-container flex flex-direction-column justify-content-center align-items"
         >
-            <h1>Welcome</h1>
+            <h1 className="welcome_message ">-- Chit Chat Chai💬 --</h1>
             <img
                 className="justify-content align-items"
-                src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.dribbble.com%2Fusers%2F406059%2Fscreenshots%2F1466728%2Fdribbble_spirit_logo.gif&f=1&nofb=1"
+                src="Chit Chat Chai.png"
             />
             <HashRouter>
                 <div>
@@ -22,9 +21,6 @@ export default function Welcome() {
                     <Route path="/password/reset" component={PasswordReset} />
                 </div>
             </HashRouter>
-            <span>
-                <footer>&copy; Nisarg Mewada, Social Network 2021-22.</footer>
-            </span>
         </div>
     );
 }

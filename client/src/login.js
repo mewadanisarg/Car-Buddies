@@ -40,26 +40,29 @@ export default class Login extends React.Component {
     render() {
         console.log("Login.js route is working");
         return (
-            <div className="flex flex-direction-column ">
+            <div className="login-page">
                 {this.state.error && (
                     <div className="error">
-                        Oops! Somwthing went wrong.! Please try again
+                        Oops! Something went wrong.! Please try again
                     </div>
                 )}
                 <form className="flex flex-direction-column ">
-                    <label>Email</label>
                     <input
                         name="email"
                         type="email"
                         required
                         onChange={(e) => this.handleChange(e)}
+                        className="login-input"
+                        placeholder="Email"
                     />
-                    <label>Password</label>
+
                     <input
                         name="password"
                         type="password"
                         required
                         onChange={(e) => this.handleChange(e)}
+                        className="login-input"
+                        placeholder="Password"
                     />
                     <button onClick={(e) => this.login(e)}>login</button>
                     <div>

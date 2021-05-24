@@ -7,6 +7,7 @@ import axios from "./axios";
 import Profile from "./profile";
 import OtherProfile from "./other-profile";
 import FindPeople from "./find-people";
+import { Link } from "react-router-dom";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -33,7 +34,7 @@ export default class App extends React.Component {
                         last: response.data.last_name,
                         imgUrl: response.data.img_url,
                         bio: response.data.bio,
-                    },
+                    }
                     // () =>
                     //     console.log(
                     //         "this.state in app after adding info: ",
@@ -66,7 +67,25 @@ export default class App extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="app-container">
+                <nav className="navbar">
+                    <Link to="/">
+                        <img
+                            src="/home/nisargmewada/webdev/marjoram-socialnetwork/client/public/Chit Chat Chai.png"
+                            className="chai-logo"
+                        ></img>
+                    </Link>
+                    <Link to="/users" className="find-nav">
+                        Find People
+                    </Link>
+                    <Link to="/friends" className="find-nav">
+                        Friends-List
+                    </Link>
+                    <Link>Chit Chat</Link>
+                    <a href="/logout" className="logout">
+                        Logout
+                    </a>
+                </nav>
                 <header>
                     <Logo />
                 </header>
@@ -110,14 +129,7 @@ export default class App extends React.Component {
                             </div>
                         </BrowserRouter>
                     }
-                    {/*<Profile
-                        userId={this.state.userId}
-                        first={this.state.first}
-                        last={this.state.last}
-                        bio={this.state.bio}
-                        setbio={this.setbio}
-                        imgUrl={this.state.imgUrl || "/default-user.png"}
-                    />*/}
+
                     {this.state.uploaderIsVisible && (
                         <Uploader
                             updateProfilephoto={this.updateProfilephoto}
