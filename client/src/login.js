@@ -40,42 +40,44 @@ export default class Login extends React.Component {
     render() {
         console.log("Login.js route is working");
         return (
-            <div className="login-page">
+            <div cl>
+                <div className="login-page">
+                    <form className="flex flex-direction-column ">
+                        <input
+                            name="email"
+                            type="email"
+                            required
+                            onChange={(e) => this.handleChange(e)}
+                            className="login-input"
+                            placeholder="Email"
+                        />
+
+                        <input
+                            name="password"
+                            type="password"
+                            required
+                            onChange={(e) => this.handleChange(e)}
+                            className="login-input"
+                            placeholder="Password"
+                        />
+                        <button onClick={(e) => this.login(e)}>login</button>
+                        <div>
+                            <Link
+                                to="/password/reset"
+                                className="login-route"
+                                href="#"
+                            >
+                                Reset Password
+                            </Link>
+                        </div>
+                        <Link to="/">Sign up</Link>
+                    </form>
+                </div>
                 {this.state.error && (
-                    <div className="error">
-                        Oops! Something went wrong.! Please try again
+                    <div className="login-error">
+                        Oops! Something went wrong.! Please try again !
                     </div>
                 )}
-                <form className="flex flex-direction-column ">
-                    <input
-                        name="email"
-                        type="email"
-                        required
-                        onChange={(e) => this.handleChange(e)}
-                        className="login-input"
-                        placeholder="Email"
-                    />
-
-                    <input
-                        name="password"
-                        type="password"
-                        required
-                        onChange={(e) => this.handleChange(e)}
-                        className="login-input"
-                        placeholder="Password"
-                    />
-                    <button onClick={(e) => this.login(e)}>login</button>
-                    <div>
-                        <Link
-                            to="/password/reset"
-                            className="login-route"
-                            href="#"
-                        >
-                            Reset Password
-                        </Link>
-                    </div>
-                    <Link to="/">Sign up</Link>
-                </form>
             </div>
         );
     }

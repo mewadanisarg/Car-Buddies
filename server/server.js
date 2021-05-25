@@ -23,6 +23,7 @@ const {
     addConnection,
     updateConnection,
     unfriendConnection,
+    seeFriendsRequest,
 } = require("./db");
 const s3 = require("../s3");
 const { s3Url } = require("../config.json");
@@ -30,12 +31,30 @@ const multer = require("multer"); // This talk with harddrive for uploading the 
 const uidSafe = require("uid-safe");
 
 // Setting up cookie parser
-app.use(
-    cookieSession({
-        secret: require("../secrets.json").COOKIE_SECRET,
-        maxAge: 1000 * 60 * 60 * 24 * 14, // After two week, cookies will be reset
-    })
-);
+// app.use(
+//     cookieSession({
+//         secret: require("../secrets.json").COOKIE_SECRET,
+//         maxAge: 1000 * 60 * 60 * 24 * 14, // After two week, cookies will be reset
+//     })
+// );
+
+// Setting up Socket.io
+const server = require("http").Server(app);
+const io = require("socket.io")(server, {
+    allowRequest: (req, callback) =>
+        callback(null, req.headers.referer.startsWith("http://localhost:3000")),
+});
+// New Cookie Session from Part-10
+
+const cookieSessionMiddleware = cookieSession({
+    secret: `I'm always angry.`,
+    maxAge: 1000 * 60 * 60 * 24 * 90,
+});
+
+app.use(cookieSessionMiddleware);
+io.use(function (socket, next) {
+    cookieSessionMiddleware(socket.request, socket.request.res, next);
+});
 
 // Image Upload Code
 
@@ -443,6 +462,19 @@ app.post("/friendsconnection", async (req, res) => {
     }
 });
 
+// Part-9 Friends and Request
+
+app.get("/friendsrequest.json", async (req, res) => {
+    const { userId } = req.session;
+    try {
+        const { rows } = await seeFriendsRequest(userId);
+        console.log(("rows: ", rows));
+        res.json(rows);
+    } catch (error) {
+        console.log("Error in /friendsrequest route: ", error);
+    }
+});
+
 // Logout route
 app.get("/logout", (req, res) => {
     req.session = null;
@@ -458,6 +490,19 @@ app.get("*", function (req, res) {
     }
 });
 
-app.listen(process.env.PORT || 3001, function () {
+//app.listen changed to server.listen
+server.listen(process.env.PORT || 3001, function () {
     console.log("I'm listening, and you are doing great..!");
+});
+
+// Part 10 for live chatting.
+// Only connect when they are loggedIn ..!!
+io.on("connection", function (socket) {
+    if (!socket.request.session.userId) {
+        return socket.disconnect(true);
+    }
+
+    const userId = socket.request.session.userId;
+
+    /* ... */
 });

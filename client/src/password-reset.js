@@ -67,18 +67,19 @@ export default class PasswordReset extends Component {
     determineViewToRender() {
         if (this.state.view === 1) {
             return (
-                <div className="flex flex-direction-column align-items">
+                <div className="password-reset">
                     {this.state.error && (
                         <p className="error">
                             Oops! Something went wrong.! Please try again
                         </p>
                     )}
                     <h2>Please enter the registered email</h2>
-                    <label htmlFor="email">Email</label>
+                    <label htmlFor="email"></label>
                     <input
                         type="email"
                         name="email"
                         id="email"
+                        placeholder="Email"
                         required
                         onChange={(e) => {
                             this.handleChange(e);
@@ -96,13 +97,13 @@ export default class PasswordReset extends Component {
             );
         } else if (this.state.view === 2) {
             return (
-                <div className="flex flex-direction-column align-items">
+                <div className="password-reset">
                     {this.state.error && (
                         <p className="error">
                             Oops! Something went wrong.! Please try it again
                         </p>
                     )}
-                    <form className="flex flex-direction-column align-items">
+                    <form className="">
                         <label htmlFor="code">Verification Code</label>
                         <input
                             type="text"
@@ -113,11 +114,12 @@ export default class PasswordReset extends Component {
                                 this.handleChange(e);
                             }}
                         />
-                        <label htmlFor="password">New Password</label>
+                        <label htmlFor="password"></label>
                         <input
                             type="password"
                             name="password"
                             id="password"
+                            placeholder="Password"
                             required
                             onChange={(e) => {
                                 this.handleChange(e);
@@ -136,7 +138,7 @@ export default class PasswordReset extends Component {
             );
         } else if (this.state.view === 3) {
             return (
-                <div className="flex flex-direction-column align-items">
+                <div className="password-reset">
                     <p>
                         <>You have successfully reset your password</>
                     </p>
@@ -157,7 +159,7 @@ export default class PasswordReset extends Component {
                         className="flex flex-direction-column align-items"
                         href="#"
                     >
-                        Login
+                        Back to Login Page
                     </Link>
                 </div>
             </>

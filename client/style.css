@@ -45,6 +45,22 @@ form {
     display: flex;
     justify-content: center;
 }
+.navbar {
+    width: 900px;
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 50px;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+}
+
+.chai-logo {
+    width: 50px;
+    height: 50px;
+    margin-left: 35px;
+}
 
 .registration {
     border: 2px solid;
@@ -66,13 +82,28 @@ form {
     margin-top: 10px;
 }
 
-.login-input{
+.login-input {
     padding: 5px;
     margin: 5px;
     border-radius: 5px;
     align-items: center;
 }
+.login-error {
+    width: 250px;
+    height: auto;
+    margin-top: 10px;
+    padding-left: 25px;
+}
 
+.password-reset {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid;
+    border-radius: 10px;
+    padding: 30px;
+    margin-top: 10px;
+}
 .flex {
     display: flex;
 }
@@ -126,4 +157,9 @@ footer {
     position: absolute;
     top: 10px;
     right: 10px;
+}
+
+.chat-container {
+    width: 300px;
+    overflow-y: auto;
 }

@@ -61,6 +61,7 @@ export default function FindPeople() {
                 <h3>Search for People :</h3>
                 <input onChange={onChange} />
                 <p>
+                
                     Let increase the Spirit by sharing the spirit with{" "}
                     {searchField}
                 </p>
