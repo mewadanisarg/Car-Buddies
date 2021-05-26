@@ -48,3 +48,20 @@ export async function unfriendRequest(id) {
         console.log("Error in Unfriending user action: ", error);
     }
 }
+
+// Part 10 CHATS, recent 10 messages
+export async function chatMessages(messages) {
+    console.log("Messagessss from action.js: ", messages);
+    return {
+        type: "CHAT_MESSAGES",
+        messages,
+    };
+}
+
+export async function chatMessage(message) {
+    console.log("Message from action.js: ", message);
+    return {
+        type: "CHAT_MESSAGE",
+        message,
+    };
+}

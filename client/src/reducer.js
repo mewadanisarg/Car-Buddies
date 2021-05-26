@@ -29,5 +29,21 @@ export default function reducer(state = {}, action) {
         };
     }
 
+    // PART-10 for last 10 messages
+    if (action.type === "CHAT_MESSAGES") {
+        console.log("Woho..! Latest 10 Messages reducer is working..!");
+        return {
+            ...state,
+            chatMessages: [...action.messages],
+        };
+    }
+    if (action.type === "CHAT_MESSAGE") {
+        console.log("Only Message state from the reducer: ", state);
+        state = {
+            ...state,
+            chatMessages: [...state.chatMessages, action.message],
+        };
+    }
+
     return state;
 }

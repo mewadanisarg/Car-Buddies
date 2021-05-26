@@ -1,8 +1,9 @@
 import { useEffect, useRef } from "react";
-import { socket } from "./socket.js";
+import { socket } from "./socket";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
-export function Chat() {
+export default function Chat() {
     const chatMessages = useSelector((state) => state && state.chatMessages);
     console.log("chatMessages: ", chatMessages);
     const elemRef = useRef();
@@ -33,24 +34,37 @@ export function Chat() {
     };
 
     console.log("elemRef: ", elemRef);
+
     return (
         <div className="chat-mains">
             <h1>Chit Chat Room</h1>
             <div className="chat-container">
-                <p>This will the Chat Messages</p>
-                <p>This will the Chat Messages</p>
-                <p>This will the Chat Messages</p>
-                <p>This will the Chat Messages</p>
-                <p>This will the Chat Messages</p>
-                <p>This will the Chat Messages</p>
-                <p>This will the Chat Messages</p>
-                <p>This will the Chat Messages</p>
-                <p>This will the Chat Messages</p>
-                <p>This will the Chat Messages</p>
+                {chatMessages.map((message, index) => {
+                    const { id, img_url, first_name, last_name, created_at } =
+                        message;
+                    return (
+                        <>
+                            <div>
+                                <img
+                                    src={img_url}
+                                    alt={`${first_name} ${last_name}`}
+                                />
+                                <h4>
+                                    <Link to={`/user/${id}`}>
+                                        {" "}
+                                        {first_name} {last_name}{" "}
+                                    </Link>
+                                    <span>{created_at}</span>
+                                </h4>
+                                <p key={index}>{message.message}</p>
+                            </div>
+                        </>
+                    );
+                })}
             </div>
             <textarea
                 onKeyDown={handleKeyDown}
-                placeholder="Please add your chate here"
+                placeholder="Please add your chats here"
             ></textarea>
         </div>
     );

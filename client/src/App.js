@@ -7,6 +7,7 @@ import Profile from "./profile";
 import OtherProfile from "./other-profile";
 import FindPeople from "./find-people";
 import Friends from "./friends";
+import Chat from "./chat";
 import { Link } from "react-router-dom";
 
 export default class App extends React.Component {
@@ -83,7 +84,7 @@ export default class App extends React.Component {
                             <Link to="/friends" className="find-nav">
                                 Friends-List
                             </Link>
-                            <Link>Chit Chat</Link>
+                            <Link to="/chat">Chit Chat</Link>
                             <a href="/logout" className="logout">
                                 Logout
                             </a>
@@ -130,6 +131,7 @@ export default class App extends React.Component {
                             />
                             <Route path="/find/users" component={FindPeople} />
                             <Route path="/friends" component={Friends} />
+                            <Route path="/chat" component={Chat} />
                         </div>
                     </BrowserRouter>
                 }

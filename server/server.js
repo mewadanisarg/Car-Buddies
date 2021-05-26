@@ -24,6 +24,8 @@ const {
     updateConnection,
     unfriendConnection,
     seeFriendsRequest,
+    insertMessages,
+    getRecentChats,
 } = require("./db");
 const s3 = require("../s3");
 const { s3Url } = require("../config.json");
@@ -501,8 +503,39 @@ io.on("connection", function (socket) {
     if (!socket.request.session.userId) {
         return socket.disconnect(true);
     }
-
     const userId = socket.request.session.userId;
+    console.log("userId from io.on in server: ", userId);
 
     /* ... */
+    (async () => {
+        try {
+            const { rows } = await getRecentChats();
+            console.log("ROWS: ", rows);
+            io.sockets.emit("chatMessages", rows.reverse());
+        } catch (error) {
+            console.log("error: ", error);
+        }
+    })();
+    socket.on("chatMessage", async (chat) => {
+        const message = chat;
+        console.log("Chats from chat route", message);
+
+        try {
+            const response = await insertMessages(message, userId);
+            console.log("response from chat route: from server.js ", response);
+            const { rows } = await getOtherUserProfile(userId);
+            console.log("rows of the chat route from server.js: ", rows);
+
+            const chatForData = {
+                essage: response.rows[0].message,
+                created_at: response.rows[0].created_at,
+                first_name: rows[0].first_name,
+                last_name: rows[0].last_name,
+                img_url: rows[0].img_url,
+            };
+            io.socket.emit("chatMessage: ", chatForData);
+        } catch (error) {
+            console.log("Error in adding the message into chat-box", error);
+        }
+    });
 });
