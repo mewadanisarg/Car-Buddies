@@ -77,7 +77,7 @@ export default class App extends React.Component {
                                     className="chai-logo"
                                 ></img>
                             </Link>
-                            <Link to="/users" className="find-nav">
+                            <Link to="/find/users" className="find-nav">
                                 Find People
                             </Link>
                             <Link to="/friends" className="find-nav">
@@ -118,6 +118,7 @@ export default class App extends React.Component {
                                 )}
                             />
                             <Route
+                                exact
                                 path="/user/:id"
                                 render={(props) => (
                                     <OtherProfile
@@ -128,10 +129,15 @@ export default class App extends React.Component {
                                 )}
                             />
                             <Route
+                                exact
                                 path="/find/users"
                                 render={() => <FindPeople />}
                             />
-                            <Route path="/friends" render={() => <Friends />} />
+                            <Route
+                                exact
+                                path="/friends"
+                                render={() => <Friends />}
+                            />
                         </div>
                     </BrowserRouter>
                 }

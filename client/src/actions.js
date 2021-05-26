@@ -3,11 +3,11 @@ import axios from "./axios";
 export async function seeFriendsRequest() {
     console.log("SeeFriendRequest: ");
     try {
-        const { data } = await axios.get("/friendsrequest");
+        const { data } = await axios.get("/friendsrequest.json");
         console.log("Data from Freinds Request route: ", data);
         return {
             type: "FRIENDS_REQUESTS",
-            users: data,
+            arrayofFriendRequest: data,
         };
     } catch (error) {
         console.log("Error in axios request to /friendsrequest route", error);

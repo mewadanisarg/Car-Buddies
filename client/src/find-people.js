@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "./axios";
+import { Link } from "react-router-dom";
 
 export default function FindPeople() {
     const [users, setUsers] = useState([]);
@@ -55,26 +56,30 @@ export default function FindPeople() {
     const onChange = ({ target }) => {
         setSearchField(target.value);
     };
+
     return (
         <>
             <div className="find-people-maincontainer">
                 <h3>Search for People :</h3>
                 <input onChange={onChange} />
                 <p>
-                
                     Let increase the Spirit by sharing the spirit with{" "}
                     {searchField}
                 </p>
                 <ul>
                     {users &&
                         users.map((user, index) => {
+                            console.log("user.id", user.id);
                             return (
                                 <div key={index}>
-                                    <img
-                                        src={
-                                            user.img_url || "default-user.jpeg"
-                                        }
-                                    />
+                                    <Link to={`/user/${user.id}`}>
+                                        <img
+                                            src={
+                                                user.img_url ||
+                                                "default-user.jpeg"
+                                            }
+                                        />
+                                    </Link>
                                     <p key={user.first}>
                                         {user.first} {user.last}
                                     </p>

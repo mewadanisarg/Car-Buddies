@@ -7,11 +7,35 @@ import {
     unfriendRequest,
 } from "./actions";
 
+
 export default function Friends() {
     const dispatch = useDispatch();
+    const friends = useSelector(
+        (state) =>
+            state.arrayofFriendRequest &&
+            state.arrayofFriendRequest.filter((user) => user.accepted)
+    );
+
+    const requests = useSelector(
+        (state) =>
+            state.arrayofFriendRequest &&
+            state.arrayofFriendRequest.filter((user) => user.accepted === false)
+    );
 
     useEffect(() => {
-        dispatch(seeFriendsRequest());
+        (!friends || !requests) && dispatch(seeFriendsRequest());
     }, []);
-    return <h1>A friend list</h1>;
+
+    if (!friends || !request) {
+        return null;
+    }
+
+    return (
+        <div className="friends-main-container">
+            <div className="">
+                Friends
+            </div>
+
+        </div>
+    )
 }
