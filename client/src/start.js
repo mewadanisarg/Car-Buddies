@@ -7,6 +7,7 @@ import reducer from "./reducer";
 import { Provider } from "react-redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { io } from "socket.io-client";
+import { init } from "./socket";
 
 const store = createStore(
     reducer,
@@ -25,6 +26,7 @@ socket.on("welcome", function (data) {
 if (location.pathname == "/welcome") {
     ReactDOM.render(<Welcome />, document.querySelector("main"));
 } else {
+    init(store);
     ReactDOM.render(
         <Provider store={store}>
             <App />

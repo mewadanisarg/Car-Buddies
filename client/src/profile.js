@@ -11,6 +11,7 @@ export default function Profile(props) {
                 first={props.first}
                 last={props.last}
                 imgUrl={props.imgUrl}
+                toggleUploader={props.toggleUploader}
             />
             <>
                 <h3>

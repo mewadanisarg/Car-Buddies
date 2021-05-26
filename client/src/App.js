@@ -69,72 +69,68 @@ export default class App extends React.Component {
     render() {
         return (
             <div className="app-container">
-                {
-                    <BrowserRouter>
-                        <div className="navbar">
-                            <Link to="/">
-                                <img
-                                    src="Chit Chat Chai.png"
-                                    className="chai-logo"
-                                ></img>
-                            </Link>
-                            <Link to="/find/users" className="find-nav">
-                                Find People
-                            </Link>
-                            <Link to="/friends" className="find-nav">
-                                Friends-List
-                            </Link>
-                            <Link to="/chat">Chit Chat</Link>
-                            <a href="/logout" className="logout">
-                                Logout
-                            </a>
-                            <ProfilePic
-                                userId={this.state.userId}
-                                first={this.state.first}
-                                last={this.state.last}
-                                imgUrl={
-                                    this.state.imgUrl || "/default-user.png"
-                                }
-                                toggleUploader={this.toggleUploader}
-                            />
-                        </div>
+                <BrowserRouter>
+                    <div className="navbar">
+                        <Link to="/">
+                            <img
+                                src="Chit Chat Chai.png"
+                                className="chai-logo"
+                            ></img>
+                        </Link>
+                        <Link to="/find/users" className="find-nav">
+                            Find People
+                        </Link>
+                        <Link to="/friends" className="find-nav">
+                            Friends-List
+                        </Link>
+                        <Link to="/chat">Chit Chat</Link>
+                        <a href="/logout" className="logout">
+                            Logout
+                        </a>
+                        <ProfilePic
+                            userId={this.state.userId}
+                            first={this.state.first}
+                            last={this.state.last}
+                            imgUrl={this.state.imgUrl || "/default-user.png"}
+                            toggleUploader={this.toggleUploader}
+                        />
+                    </div>
 
-                        <div className="app-profile-container">
-                            <Route
-                                exact
-                                path="/"
-                                render={() => (
-                                    <Profile
-                                        userId={this.state.userId}
-                                        first={this.state.first}
-                                        last={this.state.last}
-                                        imgUrl={
-                                            this.state.imgUrl ||
-                                            "/default-user.png"
-                                        }
-                                        onClick={this.showUploader}
-                                        bio={this.state.bio}
-                                        setbio={this.setbio}
-                                    />
-                                )}
-                            />
-                            <Route
-                                exact
-                                path="/user/:id"
-                                render={(props) => (
-                                    <OtherProfile
-                                        key={props.match.url}
-                                        match={props.match}
-                                        history={props.history}
-                                    />
-                                )}
-                            />
-                            <Route path="/find/users" component={FindPeople} />
-                            <Route path="/friends" component={Friends} />
-                            <Route path="/chat" component={Chat} />
-                        </div>
-                    </BrowserRouter>
-                }
+                    <div className="app-profile-container">
+                        <Route
+                            exact
+                            path="/"
+                            render={() => (
+                                <Profile
+                                    userId={this.state.userId}
+                                    first={this.state.first}
+                                    last={this.state.last}
+                                    imgUrl={
+                                        this.state.imgUrl || "/default-user.png"
+                                    }
+                                    onClick={this.showUploader}
+                                    bio={this.state.bio}
+                                    setbio={this.setbio}
+                                    toggleUploader={this.toggleUploader}
+                                />
+                            )}
+                        />
+                        <Route
+                            exact
+                            path="/user/:id"
+                            render={(props) => (
+                                <OtherProfile
+                                    key={props.match.url}
+                                    match={props.match}
+                                    history={props.history}
+                                />
+                            )}
+                        />
+                        <Route path="/find/users" component={FindPeople} />
+                        <Route path="/friends" component={Friends} />
+                        <Route path="/chat" component={Chat} />
+                    </div>
+                </BrowserRouter>
 
                 {this.state.uploaderIsVisible && (
                     <Uploader

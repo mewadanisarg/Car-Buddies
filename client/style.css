@@ -167,7 +167,11 @@ footer {
     top: 10px;
     right: 10px;
 }
-
+.modal-container{
+    display: flex;
+    flex-direction: column ;
+    justify-content: flex-end;
+}
 .chat-container {
     width: 300px;
     overflow-y: auto;
