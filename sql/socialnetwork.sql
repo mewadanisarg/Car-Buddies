@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS reset_codes CASCADE;
 DROP TABLE IF EXISTS friendships CASCADE;
+DROP TABLE IF EXISTS chats CASCADE;
 
 CREATE TABLE users(
     id SERIAL PRIMARY KEY,
@@ -26,3 +27,9 @@ sender_id INT REFERENCES users(id) NOT NULL,
 recipient_id INT REFERENCES users(id) NOT NULL,
 accepted BOOLEAN DEFAULT false);
 
+CREATE TABLE chat(
+id            SERIAL PRIMARY KEY,
+sender_id     INT REFERENCES users(id) NOT NULL,
+message       TEXT NOT NULL,
+created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
