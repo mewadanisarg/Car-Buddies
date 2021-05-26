@@ -4,7 +4,7 @@ export async function seeFriendsRequest() {
     console.log("SeeFriendRequest: ");
     try {
         const { data } = await axios.get("/friendsrequest.json");
-        console.log("Data from Freinds Request route: ", data);
+        console.log("Data from Friends Request route: ", data);
         return {
             type: "FRIENDS_REQUESTS",
             arrayofFriendRequest: data,

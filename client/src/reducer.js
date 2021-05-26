@@ -2,7 +2,7 @@ export default function reducer(state = {}, action) {
     if (action.type === "FRIENDS_REQUESTS") {
         state = {
             ...state,
-            arrayofFriendRequest: action.users,
+            arrayofFriendRequest: action.arrayofFriendRequest,
         };
     }
     if (action.type === "ACCEPT_REQUEST") {

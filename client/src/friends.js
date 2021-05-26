@@ -7,7 +7,6 @@ import {
     unfriendRequest,
 } from "./actions";
 
-
 export default function Friends() {
     const dispatch = useDispatch();
     const friends = useSelector(
@@ -26,16 +25,99 @@ export default function Friends() {
         (!friends || !requests) && dispatch(seeFriendsRequest());
     }, []);
 
-    if (!friends || !request) {
+    if (!friends || !requests) {
         return null;
     }
 
     return (
         <div className="friends-main-container">
-            <div className="">
-                Friends
+            <div className="allfriends-container">
+                <div className="friendsrequest-main-container">
+                    <h2>Your {friends.length} friends </h2>
+                    <div className="friendsrequest-grid">
+                        {friends &&
+                            friends.map((user) => {
+                                const { id, first_name, last_name, img_url } =
+                                    user;
+                                console.log("wannabefreinds list: ", user);
+                                return (
+                                    <>
+                                        <div className="other-profile">
+                                            <Link key={id} to={`/user/${id}`}>
+                                                <img
+                                                    src={
+                                                        img_url ||
+                                                        "default_user.jpeg"
+                                                    }
+                                                    alt={`${first_name} ${last_name}`}
+                                                ></img>
+                                                <p>
+                                                    {first_name} {last_name}
+                                                </p>
+                                            </Link>
+                                            <button
+                                                className="friends-acceptbtn-unfriendbtn"
+                                                onClick={() =>
+                                                    dispatch(
+                                                        unfriendRequest(id)
+                                                    )
+                                                }
+                                            >
+                                                Unfriend
+                                            </button>
+                                        </div>
+                                    </>
+                                );
+                            })}
+                    </div>
+                </div>
             </div>
-
+            <div className="friendsrequest-main-container">
+                <h2>You have {requests.length} friend request</h2>
+                <div className="friendsrequest-grid">
+                    {requests &&
+                        requests.map((user) => {
+                            const { id, first_name, last_name, img_url } = user;
+                            console.log("wannabefreinds list: ", user);
+                            return (
+                                <>
+                                    <div className="other-profile">
+                                        <Link key={id} to={`/user/${id}`}>
+                                            <img
+                                                src={
+                                                    img_url ||
+                                                    "default_user.jpeg"
+                                                }
+                                                alt={`${first_name} ${last_name}`}
+                                            ></img>
+                                            <p>
+                                                {first_name} {last_name}
+                                            </p>
+                                        </Link>
+                                        <button
+                                            className="friends-acceptbtn-unfriendbtn"
+                                            onClick={() =>
+                                                dispatch(
+                                                    acceptFriendRequest(id)
+                                                )
+                                            }
+                                        >
+                                            Accept
+                                        </button>
+                                        <button
+                                            className="friends-acceptbtn-unfriendbtn"
+                                            onClick={() =>
+                                                dispatch(unfriendRequest(id))
+                                            }
+                                        >
+                                            Decline friend request
+                                        </button>
+                                    </div>
+                                </>
+                            );
+                        })}
+                </div>
+            </div>
         </div>
-    )
+    );
 }

@@ -62,16 +62,13 @@ export default function FindPeople() {
             <div className="find-people-maincontainer">
                 <h3>Search for People :</h3>
                 <input onChange={onChange} />
-                <p>
-                    Let increase the Spirit by sharing the spirit with{" "}
-                    {searchField}
-                </p>
-                <ul>
+                <br />
+                <div className="found-people-grid">
                     {users &&
                         users.map((user, index) => {
                             console.log("user.id", user.id);
                             return (
-                                <div key={index}>
+                                <div className="newusers-photo" key={index}>
                                     <Link to={`/user/${user.id}`}>
                                         <img
                                             src={
@@ -79,14 +76,14 @@ export default function FindPeople() {
                                                 "default-user.jpeg"
                                             }
                                         />
+                                        <p key={user.first_name}>
+                                            {user.first_name} {user.last_name}
+                                        </p>
                                     </Link>
-                                    <p key={user.first}>
-                                        {user.first} {user.last}
-                                    </p>
                                 </div>
                             );
                         })}
-                </ul>
+                </div>
             </div>
         </>
     );

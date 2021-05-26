@@ -128,16 +128,8 @@ export default class App extends React.Component {
                                     />
                                 )}
                             />
-                            <Route
-                                exact
-                                path="/find/users"
-                                render={() => <FindPeople />}
-                            />
-                            <Route
-                                exact
-                                path="/friends"
-                                render={() => <Friends />}
-                            />
+                            <Route path="/find/users" component={FindPeople} />
+                            <Route path="/friends" component={Friends} />
                         </div>
                     </BrowserRouter>
                 }

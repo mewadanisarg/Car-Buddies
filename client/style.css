@@ -48,12 +48,14 @@ form {
 .navbar {
     width: 900px;
     margin-top: 20px;
+    margin-left: 10px;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-gap: 50px;
     align-items: center;
     text-align: center;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .chai-logo {
@@ -130,8 +132,6 @@ img {
 }
 
 footer {
-    display: block;
-    position: absolute;
     bottom: 10px;
     left: 10px;
 }
@@ -145,6 +145,15 @@ footer {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+}
+.bio-draft-container {
+    display: contents;
+    justify-content: center;
+    align-items: center;
+}
+.biosedit-btn {
+    align-items: center;
 }
 
 .large-profile-photo {
@@ -162,4 +171,38 @@ footer {
 .chat-container {
     width: 300px;
     overflow-y: auto;
+}
+
+.friendsrequest-grid {
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 35px;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+}
+.friends-acceptbtn-unfriendbtn {
+    height: 30px;
+    width: 150px;
+    font-size: 10px;
+    padding: 0px;
+}
+
+.find-people-maincontainer {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+}
+.newusers-photo {
+    align-items: center;
+}
+
+.found-people-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    justify-content: center;
 }
