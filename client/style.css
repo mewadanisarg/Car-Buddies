@@ -4,9 +4,10 @@
     padding-top: 0%;
 }
 
+html,
 body {
     background: whitesmoke;
-    height: 100vh;
+    height: 100%;
     font-family: "Padauk", sans-serif;
 }
 
@@ -132,6 +133,7 @@ img {
 }
 
 footer {
+    position: absolute;
     bottom: 10px;
     left: 10px;
 }
@@ -164,19 +166,27 @@ footer {
     width: 70px;
     height: 70px;
     position: absolute;
-    top: 10px;
+    top: 34px;
     right: 10px;
 }
-.modal-container{
+.modal-container {
     display: flex;
-    flex-direction: column ;
+    flex-direction: column;
     justify-content: flex-end;
 }
 .chat-container {
-    width: 300px;
     overflow-y: auto;
+    width: 500px;
+    height: 600px;
+    border: 2px solid black;
+    border-radius: 10px;
 }
-
+.friendsrequest-main-container {
+    margin: 15px;
+    padding: 10px;
+    border: 5px lightgray dotted;
+    border-radius: 10px;
+}
 .friendsrequest-grid {
     justify-content: center;
     display: grid;
@@ -209,4 +219,30 @@ footer {
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 20px;
     justify-content: center;
+}
+
+.chat-mains {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+}
+.chat-box {
+    padding: 5px;
+    margin: 10px;
+    border: 2px lightgray dotted;
+    border-radius: 10px;
+}
+.chat-prof-image {
+    width: 35px;
+    height: auto;
+}
+textarea {
+    resize: vertical;
+}
+.txtarea-chat {
+    width: 500px;
+    margin-top: 15px;
+    border: 2px solid black;
+    border-radius: 5px;
 }

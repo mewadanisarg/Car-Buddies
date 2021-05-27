@@ -27,7 +27,7 @@ export default class App extends React.Component {
         axios
             .get("/user")
             .then((response) => {
-                console.log("user data app mounted:", response);
+                // console.log("user data app mounted:", response);
                 this.setState(
                     {
                         userId: response.data.userId,

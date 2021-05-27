@@ -31,7 +31,7 @@ export default function reducer(state = {}, action) {
 
     // PART-10 for last 10 messages
     if (action.type === "CHAT_MESSAGES") {
-        console.log("Woho..! Latest 10 Messages reducer is working..!");
+        // console.log("Woho..! Latest 10 Messages reducer is working..!");
         return {
             ...state,
             chatMessages: [...action.messages],

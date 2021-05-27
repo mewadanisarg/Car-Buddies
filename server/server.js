@@ -516,7 +516,7 @@ io.on("connection", function (socket) {
             console.log("error: ", error);
         }
     })();
-    socket.on("chatMessage", async (chat) => {
+    socket.on("chatmessage", async (chat) => {
         const message = chat;
         console.log("Chats from chat route", message);
 
@@ -533,7 +533,7 @@ io.on("connection", function (socket) {
                 last_name: rows[0].last_name,
                 img_url: rows[0].img_url,
             };
-            io.socket.emit("chatMessage: ", chatForData);
+            socket.emit("chatmessage: ", chatForData);
         } catch (error) {
             console.log("Error in adding the message into chat-box", error);
         }
