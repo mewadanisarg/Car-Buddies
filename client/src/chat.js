@@ -37,6 +37,7 @@ export default function Chat() {
             socket.emit("chatmessage", e.target.value);
             // emit to the server
             e.target.value = "";
+            window.location.reload(false);
         }
     };
 
