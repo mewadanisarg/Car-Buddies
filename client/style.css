@@ -1,0 +1,248 @@
+* {
+    box-sizing: border-box;
+    margin: 0%;
+    padding-top: 0%;
+}
+
+html,
+body {
+    background: whitesmoke;
+    height: 100%;
+    font-family: "Padauk", sans-serif;
+}
+
+button {
+    background-image: linear-gradient(
+        to right,
+        #ec8f6a 0%,
+        #da5926 51%,
+        #ec8f6a 100%
+    );
+    margin: 10px;
+    padding: 15px 45px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: rgb(245, 237, 237);
+    font-size: 18px;
+    font-weight: 400;
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    display: block;
+}
+
+button:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: rgb(17, 17, 17);
+    text-decoration: none;
+}
+
+.welcome-container {
+    padding: 10px;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+}
+.navbar {
+    width: 900px;
+    margin-top: 20px;
+    margin-left: 10px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 50px;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.chai-logo {
+    width: 50px;
+    height: 50px;
+    margin-left: 35px;
+}
+
+.registration {
+    border: 2px solid;
+    border-radius: 10px;
+    padding: 30px;
+    margin-top: 10px;
+}
+.registration-input {
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5px;
+    align-items: center;
+}
+
+.login-page {
+    border: 2px solid;
+    border-radius: 10px;
+    padding: 30px;
+    margin-top: 10px;
+}
+
+.login-input {
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5px;
+    align-items: center;
+}
+.login-error {
+    width: 250px;
+    height: auto;
+    margin-top: 10px;
+    padding-left: 25px;
+}
+
+.password-reset {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid;
+    border-radius: 10px;
+    padding: 30px;
+    margin-top: 10px;
+}
+.flex {
+    display: flex;
+}
+.flex-direction-column {
+    flex-direction: column;
+}
+
+.flex-direction-row {
+    flex-direction: row;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.align-items {
+    align-items: center;
+}
+
+img {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+}
+
+footer {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+
+.main-app-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.bio-draft-container {
+    display: contents;
+    justify-content: center;
+    align-items: center;
+}
+.biosedit-btn {
+    align-items: center;
+}
+
+.large-profile-photo {
+    width: 100px;
+    height: 100px;
+}
+.profile-small-photo {
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    top: 34px;
+    right: 10px;
+}
+.modal-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.chat-container {
+    overflow-y: auto;
+    width: 500px;
+    height: 600px;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+.friendsrequest-main-container {
+    margin: 15px;
+    padding: 10px;
+    border: 5px lightgray dotted;
+    border-radius: 10px;
+}
+.friendsrequest-grid {
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 35px;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+}
+.friends-acceptbtn-unfriendbtn {
+    height: 30px;
+    width: 150px;
+    font-size: 10px;
+    padding: 0px;
+}
+
+.find-people-maincontainer {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+}
+.newusers-photo {
+    align-items: center;
+}
+
+.found-people-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    justify-content: center;
+}
+
+.chat-mains {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+}
+.chat-box {
+    padding: 5px;
+    margin: 10px;
+    border: 2px lightgray dotted;
+    border-radius: 10px;
+}
+.chat-prof-image {
+    width: 35px;
+    height: auto;
+}
+textarea {
+    resize: vertical;
+}
+.txtarea-chat {
+    width: 500px;
+    margin-top: 15px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
