@@ -43,10 +43,7 @@ export default class Uploader extends Component {
         return (
             <>
                 <div className="modal-container">
-                    <div
-                        className="modal-text-container
-                    "
-                    >
+                    <div className="modal-text-container">
                         <h4>Update Profile Photo</h4>
                     </div>
                     <input
@@ -56,10 +53,20 @@ export default class Uploader extends Component {
                         onChange={(e) => this.handleChange(e)}
                     ></input>
                     <div className="modal-btn">
-                        <button onClick={(e) => this.submitFile(e)}>
+                        <button
+                            type="button"
+                            className="btn btn-secondary pic-upload-btn"
+                            onClick={(e) => this.submitFile(e)}
+                        >
                             Upload
-                        </button>
-                        <button href="#" onClick={this.props.toggleUploader}>
+                        </button>{" "}
+                        <br />
+                        <button
+                            type="button"
+                            className="btn btn-secondary pic-upload-btn"
+                            href="#"
+                            onClick={this.props.toggleUploader}
+                        >
                             Cancel
                         </button>
                     </div>

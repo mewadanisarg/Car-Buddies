@@ -9,6 +9,7 @@ body {
     background: whitesmoke;
     height: 100%;
     font-family: "Padauk", sans-serif;
+    overflow: auto;
 }
 
 /* button {
@@ -160,11 +161,20 @@ footer {
     flex-direction: column;
     justify-content: center;
 }
-.profile-container {
+
+.app-profile-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 120px;
+}
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    margin-left: 15px;
 }
 .bio-draft-container {
     display: contents;
@@ -179,17 +189,32 @@ footer {
     width: 100px;
     height: 100px;
 }
+.profile-pic {
+    position: absolute;
+    top: 25px;
+    right: 35px;
+}
 .profile-small-photo {
     width: 70px;
     height: 70px;
     position: absolute;
-    top: 34px;
-    right: 10px;
+    top: 25px;
+    right: 35px;
 }
 .modal-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+    display: block;
+    position: absolute;
+    top: 130px;
+    right: -76px;
+}
+.pic-upload-btn {
+    margin-top: 5px;
+}
+.search-input {
+    margin-top: 5px;
+    width: 170px;
+    border: 1px solid rgb(122, 121, 121);
+    border-radius: 5px;
 }
 .chat-container {
     overflow-y: auto;
@@ -243,6 +268,7 @@ footer {
     flex-direction: column;
     /* justify-content: center; */
     align-items: center;
+    overflow: auto;
 }
 .chat-box {
     padding: 5px;

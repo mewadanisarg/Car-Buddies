@@ -60,8 +60,12 @@ export default function FindPeople() {
     return (
         <>
             <div className="find-people-maincontainer">
-                <h3>Search for People :</h3>
-                <input onChange={onChange} />
+                <h3>Search here</h3>
+                <input
+                    className="search-input"
+                    onChange={onChange}
+                    placeholder=" e.g: Mercedes A45s"
+                />
                 <br />
                 <div className="found-people-grid">
                     {users &&

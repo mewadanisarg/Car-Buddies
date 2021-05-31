@@ -1,3 +1,5 @@
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min";
 import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import Uploader from "./Uploader";
@@ -8,8 +10,8 @@ import OtherProfile from "./other-profile";
 import FindPeople from "./find-people";
 import Friends from "./friends";
 import Chat from "./chat";
-import { Link } from "react-router-dom";
-
+// import { Link } from "react-router-dom";
+import Menu from "./sidebar";
 export default class App extends React.Component {
     constructor(props) {
         super(props);
@@ -70,8 +72,9 @@ export default class App extends React.Component {
         return (
             <div className="app-container">
                 <BrowserRouter>
-                    <div className="navbar">
-                        <Link to="/">
+                    <div>
+                        <Menu></Menu>
+                        {/* <Link to="/">
                             <img
                                 src="carbuddies.png"
                                 className="chai-logo"
@@ -86,7 +89,8 @@ export default class App extends React.Component {
                         <Link to="/chat">Message</Link>
                         <a href="/logout" className="logout">
                             Logout
-                        </a>
+                        </a> */}
+
                         <ProfilePic
                             userId={this.state.userId}
                             first={this.state.first}
