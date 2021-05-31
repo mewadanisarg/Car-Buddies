@@ -25,6 +25,9 @@ export default class Registration extends React.Component {
                 first: this.state.first,
                 last: this.state.last,
                 email: this.state.email,
+                carmaker: this.state.carmaker,
+                modalno: this.state.modalno,
+                regyear: this.state.regyear,
                 password: this.state.password,
             })
             .then(() => {
@@ -41,7 +44,7 @@ export default class Registration extends React.Component {
     render() {
         // console.log("/Registration Working..! ");
         return (
-            <div className="flex flex-direction-column registration ">
+            <div className="registration">
                 {this.state.error && (
                     <div className="error">
                         Oops! Somwthing went wrong.! Please try it again
@@ -53,7 +56,7 @@ export default class Registration extends React.Component {
                     required
                     onChange={(e) => this.handleChange(e)}
                     placeholder="First Name"
-                    className="registration-input"
+                    className="registration-input focus:ring-2 focus:ring-blue-500 bg-gray-300 md:hover:bg-blue-500"
                 />
 
                 <input
@@ -61,7 +64,7 @@ export default class Registration extends React.Component {
                     required
                     onChange={(e) => this.handleChange(e)}
                     placeholder="Last Name"
-                    className="registration-input"
+                    className="registration-input focus:ring-2 focus:ring-blue-500 bg-gray-300 md:hover:bg-blue-500"
                 />
 
                 <input
@@ -70,7 +73,28 @@ export default class Registration extends React.Component {
                     required
                     onChange={(e) => this.handleChange(e)}
                     placeholder="Email"
-                    className="registration-input"
+                    className="registration-input focus:ring-2 focus:ring-blue-500 bg-gray-300 md:hover:bg-blue-500"
+                />
+                <input
+                    name="carmaker"
+                    required
+                    onChange={(e) => this.handleChange(e)}
+                    placeholder="Car Company"
+                    className="registration-input focus:ring-2 focus:ring-blue-500 bg-gray-300 md:hover:bg-blue-500"
+                />
+                <input
+                    name="modalno"
+                    required
+                    onChange={(e) => this.handleChange(e)}
+                    placeholder="Model"
+                    className="registration-input focus:ring-2 focus:ring-blue-500 bg-gray-300 md:hover:bg-blue-500"
+                />
+                <input
+                    name="regyear"
+                    required
+                    onChange={(e) => this.handleChange(e)}
+                    placeholder="Purchased Year"
+                    className="registration-input focus:ring-2 focus:ring-blue-500 bg-gray-300 md:hover:bg-blue-500"
                 />
 
                 <input
@@ -79,11 +103,16 @@ export default class Registration extends React.Component {
                     required
                     onChange={(e) => this.handleChange(e)}
                     placeholder="Password"
-                    className="registration-input"
+                    className="registration-input focus:ring-2 focus:ring-blue-500 bg-gray-300 md:hover:bg-blue-500"
                 />
-                <button onClick={(e) => this.submit(e)}>submit</button>
+                <button
+                    className="md:hover:bg-blue-600  bg-white rounded-full mt-2 p-2 w-40"
+                    onClick={(e) => this.submit(e)}
+                >
+                    submit
+                </button>
                 <div>
-                    <span>Already a member?</span>
+                    <span>Already a member?</span> <br />
                     <Link to="/login" className="login-route" href="#">
                         Login Here!
                     </Link>

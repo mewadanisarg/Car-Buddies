@@ -128,11 +128,20 @@ app.get("/welcome", function (req, res) {
 app.post("/registration", (req, res) => {
     console.log("a POST request was made to /welcome route:");
     console.log("req.body:", req.body);
-    const { first, last, email, password } = req.body;
+    const { first, last, email, carmaker, modalno, regyear, password } =
+        req.body;
     hash(password)
         .then((password_hashed) => {
             console.log("password_hashed:", password_hashed);
-            addUser(first, last, email, password_hashed)
+            addUser(
+                first,
+                last,
+                email,
+                carmaker,
+                modalno,
+                regyear,
+                password_hashed
+            )
                 .then((result) => {
                     console.log("result.rows:", result.rows);
                     const { id } = result.rows[0];

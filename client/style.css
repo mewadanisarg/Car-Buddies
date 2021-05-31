@@ -11,7 +11,7 @@ body {
     font-family: "Padauk", sans-serif;
 }
 
-button {
+/* button {
     background-image: linear-gradient(
         to right,
         #ec8f6a 0%,
@@ -30,16 +30,20 @@ button {
     box-shadow: 0 0 20px #eee;
     border-radius: 10px;
     display: block;
-}
+} */
 
-button:hover {
-    background-position: right center; /* change the direction of the change here */
+/* button:hover {
+    background-position: right center; 
     color: rgb(17, 17, 17);
     text-decoration: none;
-}
+} */
 
 .welcome-container {
     padding: 10px;
+}
+.welcome-message {
+    width: 600px;
+    height: 111px;
 }
 
 form {
@@ -60,16 +64,22 @@ form {
 }
 
 .chai-logo {
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 70px;
     margin-left: 35px;
 }
 
 .registration {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
     border: 2px solid;
     border-radius: 10px;
     padding: 30px;
     margin-top: 10px;
+    background-color: #e5e7eb;
 }
 .registration-input {
     padding: 5px;
@@ -77,8 +87,15 @@ form {
     border-radius: 5px;
     align-items: center;
 }
+.registration-btn {
+    width: 20px;
+}
 
 .login-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     border: 2px solid;
     border-radius: 10px;
     padding: 30px;

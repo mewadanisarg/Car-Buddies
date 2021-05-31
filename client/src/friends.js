@@ -73,7 +73,7 @@ export default function Friends() {
                 </div>
             </div>
             <div className="friendsrequest-main-container">
-                <h2>You have {requests.length} friend request</h2>
+                <h2 keys="">You have {requests.length} friend request</h2>
                 <div className="friendsrequest-grid">
                     {requests &&
                         requests.map((user) => {

@@ -1,23 +1,42 @@
 const spicedPg = require("spiced-pg");
 const db = spicedPg(
     process.env.DATABASE_URL ||
-        "postgres:postgres:postgres@localhost:5432/socialnetwork"
+        "postgres:postgres:postgres@localhost:5432/carbuddies"
 );
 
-// Inserting user Data into DB with hashed password
-module.exports.addUser = (first_name, last_name, email, hash_password) => {
+// Inserting new user Data into DB with hashed password
+module.exports.addUser = (
+    first_name,
+    last_name,
+    email,
+    car_maker,
+    modal_no,
+    registered_year,
+    hash_password
+) => {
     console.log(
         "Inside module.export.userRegistration",
         first_name,
         last_name,
         email,
+        car_maker,
+        modal_no,
+        registered_year,
         hash_password
     );
     const q = `
-    INSERT INTO users (first_name, last_name, email, hash_password) 
-    VALUES($1, $2, $3, $4)
+    INSERT INTO users (first_name, last_name, email, car_maker, modal_no, registered_year, hash_password) 
+    VALUES($1, $2, $3, $4, $5, $6, $7)
     RETURNING id`;
-    const params = [first_name, last_name, email, hash_password];
+    const params = [
+        first_name,
+        last_name,
+        email,
+        car_maker,
+        modal_no,
+        registered_year,
+        hash_password,
+    ];
     return db.query(q, params);
 };
 

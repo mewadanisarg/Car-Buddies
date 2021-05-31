@@ -9,10 +9,11 @@ export default function Welcome() {
             id="welcome"
             className="welcome-container flex flex-direction-column justify-content-center align-items"
         >
-            <h1 className="welcome_message ">-- Chit Chat Chai💬 --</h1>
+            <img src="/Car Buddies.png" className="welcome-message" />
+
             <img
                 className="justify-content align-items"
-                src="Chit Chat Chai.png"
+                src="/carbuddies.png"
             />
             <HashRouter>
                 <div>

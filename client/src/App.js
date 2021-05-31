@@ -73,7 +73,7 @@ export default class App extends React.Component {
                     <div className="navbar">
                         <Link to="/">
                             <img
-                                src="Chit Chat Chai.png"
+                                src="carbuddies.png"
                                 className="chai-logo"
                             ></img>
                         </Link>
@@ -83,7 +83,7 @@ export default class App extends React.Component {
                         <Link to="/friends" className="find-nav">
                             Friends-List
                         </Link>
-                        <Link to="/chat">Chit Chat</Link>
+                        <Link to="/chat">Message</Link>
                         <a href="/logout" className="logout">
                             Logout
                         </a>
