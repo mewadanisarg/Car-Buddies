@@ -26,6 +26,9 @@ const {
     seeFriendsRequest,
     insertMessages,
     getRecentChats,
+    deleteUsersInfo,
+    deleteUsersConnection,
+    deleteUsersChats,
 } = require("./db");
 const s3 = require("../s3");
 const { s3Url } = require("../config.json");
@@ -486,6 +489,24 @@ app.get("/friendsrequest+.json", async (req, res) => {
     }
 });
 
+// Delete Account Route
+
+app.post("/delete-account", async (req, res) => {
+    const { userId } = req.session;
+    console.log("userId:", userId);
+    try {
+        const result = await getUserInfo(userId);
+        result.rows[0].img_url && (await s3.delete(result.rows[0].img_url));
+        await deleteUsersChats(userId);
+        await deleteUsersConnection(userId);
+        await deleteUsersInfo(userId);
+        req.session = null;
+        res.redirect("/welcome");
+    } catch (error) {
+        console.log("Error in /delete-account route:", error);
+    }
+});
+
 // Logout route
 app.get("/logout", (req, res) => {
     req.session = null;
@@ -508,12 +529,23 @@ server.listen(process.env.PORT || 3001, function () {
 
 // Part 10 for live chatting.
 // Only connect when they are loggedIn ..!!
+const onlineUsers = {}; // a mapping of socket ids to user ids
 io.on("connection", function (socket) {
     if (!socket.request.session.userId) {
         return socket.disconnect(true);
     }
     const userId = socket.request.session.userId;
     console.log("userId from io.on in server: ", userId);
+
+    onlineUsers[socket.id] = userId;
+
+    console.log(`User ${userId} just connected with socket ${socket.id}`);
+    socket.on("disconnect", () => {
+        console.log(
+            `User ${userId} just disconnected with socket ${socket.id}`
+        );
+        delete onlineUsers[socket.id];
+    });
 
     /* ... */
     (async () => {

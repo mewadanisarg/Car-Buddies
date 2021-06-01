@@ -200,3 +200,26 @@ module.exports.getRecentChats = () => {
         `SELECT users.id, first_name, last_name, img_url, message, chat.created_at FROM users JOIN chat ON chat.sender_id = users.id ORDER BY chat.created_at DESC LIMIT 10`
     );
 };
+
+// Delete Account with chats, info and connection.!
+
+module.exports.deleteUsersInfo = (userId) => {
+    console.log("Inside module.exports.deleteUsersInfo:", userId);
+    const q = `DELETE FROM users WHERE id = $1`;
+    const params = [userId];
+    return db.query(q, params);
+};
+
+module.exports.deleteUsersConnection = (userId) => {
+    console.log("Inside module.exports.deleteUsersConnection:", userId);
+    const q = `DELETE FROM friendships WHERE recipient_id = $1 OR sender_id = $1`;
+    const params = [userId];
+    return db.query(q, params);
+};
+
+module.exports.deleteUsersChats = (userId) => {
+    console.log("Inside module.exports.deleteUsersChats:", userId);
+    const q = `DELETE FROM chat WHERE sender_id = $1`;
+    const params = [userId];
+    return db.query(q, params);
+};

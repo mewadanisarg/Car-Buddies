@@ -289,3 +289,7 @@ textarea {
     border: 2px solid black;
     border-radius: 5px;
 }
+.deleteprofile-img {
+    width: 180px;
+    height: 160px;
+}

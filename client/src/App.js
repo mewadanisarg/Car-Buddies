@@ -12,6 +12,8 @@ import Friends from "./friends";
 import Chat from "./chat";
 // import { Link } from "react-router-dom";
 import Menu from "./sidebar";
+import DeleteAccount from "./deleteaccount";
+
 export default class App extends React.Component {
     constructor(props) {
         super(props);
@@ -133,6 +135,18 @@ export default class App extends React.Component {
                         <Route path="/find/users" component={FindPeople} />
                         <Route path="/friends" component={Friends} />
                         <Route path="/chat" component={Chat} />
+                        <Route
+                            path="/delete-account"
+                            render={() => (
+                                <DeleteAccount
+                                    first={this.state.first}
+                                    last={this.state.last}
+                                    imgUrl={
+                                        this.state.imgUrl || "/default-user.png"
+                                    }
+                                />
+                            )}
+                        />
                     </div>
                 </BrowserRouter>
 

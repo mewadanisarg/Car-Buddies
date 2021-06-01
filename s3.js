@@ -45,3 +45,11 @@ exports.upload = (req, res, next) => {
             res.sendStatus(404);
         });
 };
+exports.delete = (imgUrl) => {
+    return s3
+        .deleteObject({ Bucket: "spicedling", Key: imgUrl })
+        .promise()
+        .then(() => {
+            console.log("File deleted successfully");
+        });
+};
