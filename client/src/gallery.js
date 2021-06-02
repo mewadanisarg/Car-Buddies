@@ -7,10 +7,20 @@ export default class Gallery extends Component {
     }
     componentDidMount() {
         console.log("Gallery Component just mounted..!", this.props);
-        axios.get("/image").then((response) => {
-            // console.log("response.data:", response.data);
-            this.images = response.data.images;
-        });
+        axios
+            .get("/image")
+            .then((response) => {
+                // console.log("response.data:", response.data);
+                this.state({
+                    url: response.data.images,
+                });
+            })
+            .catch((error) => {
+                console.log(
+                    "error in GET req from /image componentDidMount",
+                    error
+                );
+            });
     }
     handleChange({ target }) {
         console.log("Handle Changed", target);
