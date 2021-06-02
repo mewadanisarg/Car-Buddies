@@ -12,6 +12,10 @@ class MenuLinks extends React.Component {
                     text: "Home",
                     link: "/",
                 },
+                {
+                    text: "Gallery",
+                    link: "/gallery",
+                },
 
                 {
                     text: "Find People",
@@ -24,6 +28,10 @@ class MenuLinks extends React.Component {
                 {
                     text: "Message",
                     link: "/chat",
+                },
+                {
+                    text: "Private Chat",
+                    link: "/private-chat",
                 },
                 {
                     text: "Delete Account",
@@ -95,7 +103,8 @@ export default class Menu extends React.Component {
                         className="{menuStatus} close-btn"
                         onClick={this._menuToggle}
                     >
-                        {" "}X
+                        {" "}
+                        X
                     </button>
                     {/*<div id="hambmenu" className={menuStatus}>
                         <span></span>

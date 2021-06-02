@@ -31,7 +31,7 @@ export default function DeleteAccount(props) {
                 </h1>
                 <button
                     onClick={handleDeleteAccount}
-                    className="active:outline-none bg-purple-200 font-bold rounded-full w-3/5 mt-6 p-2 duration-200 hover:bg-purple-300 hover:text-gray-700"
+                    className="active:outline-none bg-gray-200 font-bold rounded-full w-3/5 mt-6 p-2 duration-200 hover:bg-gray-300 hover:text-gray-700"
                 >
                     Yes
                 </button>

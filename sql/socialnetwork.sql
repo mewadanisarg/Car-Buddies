@@ -37,14 +37,20 @@ message       TEXT NOT NULL,
 created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE privateMessage(
+    id SERIAL PRIMARY KEY,
+    sender_id INT REFERENCES users(id) NOT NULL,
+    recipient_id INT REFERENCES users(id) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    message TEXT NOT NULL
+);
+
 CREATE TABLE gallery(
     id           SERIAL PRIMARY KEY,
     url VARCHAR NOT NULL,
-    image_id     INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    username     VARCHAR NOT NULL,
-    comment_text TEXT NOT NULL,
+    user_id     INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     created_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-)
+);
 
 INSERT INTO gallery (url) VALUES (
     'https://s3.amazonaws.com/imageboard/wg8d94G_HrWdq7bU_2wT6Y6F3zrX-kej.jpg',

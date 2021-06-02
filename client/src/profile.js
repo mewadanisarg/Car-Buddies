@@ -5,7 +5,7 @@ import BioEditor from "./Bio-Editor";
 export default function Profile(props) {
     //console.log("props in Profile:", props);
     return (
-        <div className="profile-container flex flex-col md:flex-col justify-start aling-center">
+        <div className="profile-container flex flex-col md:flex-col justify-start aling-center shadow-xl">
             {/* <ProfilePic
                     className="largepic"
                     imgUrl={props.imgUrl}

@@ -42,7 +42,6 @@ export default function FindPeople() {
                     );
                     const { data } = await axios.get("/find/users.json");
                     setUsers(data);
-                    // setUsers([]);
                 }
             } catch (error) {
                 console.log("Error in POST useEffect axios req: ", error);

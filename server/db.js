@@ -223,3 +223,46 @@ module.exports.deleteUsersChats = (userId) => {
     const params = [userId];
     return db.query(q, params);
 };
+
+module.exports.insertImages = (url, userId) => {
+    const q = `INSERT INTO gallery (url, user_id) VALUES ($1,$2) RETURNING *`;
+    const params = [url, userId];
+    return db.query(q, params);
+};
+module.exports.getAllImages = () => {
+    return db.query(`SELECT * FROM gallery ORDER BY created_at DESC LIMIT 6`);
+};
+
+//Private Message
+module.exports.recentPrivateMessage = (sender_id, recipient_id) => {
+    console.log(
+        "Inside module.exports.recentPrivateMessage: ",
+        sender_id,
+        recipient_id
+    );
+    const q = `(SELECT privateMessage.sender_id, privateMessage.recipient_id, privateMessage.message, privateMessage.created_at, users.imageurl, users.first_name, users.last_name
+        FROM privateMessage
+        JOIN users
+        ON privateMessage.sender_id = users.id
+        WHERE privateMessage.sender_id = ($1) AND privateMessage.recipient_id = ($2)
+        OR privateMessage.recipient_id = ($1) AND privateMessage.sender_id = ($2)
+    LIMIT 10)
+    ORDER BY privateMessage.created_at DESC
+    `;
+    const params = [sender_id, recipient_id];
+    return db.query(q, params);
+};
+
+module.exports.newPrivateMessage = (sender_id, recipient_id, message) => {
+    console.log(
+        "Inside module.exports.newPrivateMessage: ",
+        sender_id,
+        recipient_id,
+        message
+    );
+    const q = `INSERT INTO privateMessage (sender_id, recipient_id, message)
+    VALUES ($1, $2, $3)
+    RETURNING id, created_at`;
+    const params = [sender_id, recipient_id, message];
+    return db.query(q, params);
+};

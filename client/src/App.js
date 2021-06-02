@@ -13,6 +13,7 @@ import Chat from "./chat";
 // import { Link } from "react-router-dom";
 import Menu from "./sidebar";
 import DeleteAccount from "./deleteaccount";
+import Gallery from "./gallery";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -108,13 +109,14 @@ export default class App extends React.Component {
                             path="/"
                             render={() => (
                                 <Profile
+                                    className="shadow-xl rounded-lg flex flex-col justify-center items-center"
                                     userId={this.state.userId}
                                     first={this.state.first}
                                     last={this.state.last}
                                     imgUrl={
                                         this.state.imgUrl || "/default-user.png"
                                     }
-                                    onClick={this.showUploader}
+                                    onClick={this.toggleUploader}
                                     bio={this.state.bio}
                                     setbio={this.setbio}
                                     toggleUploader={this.toggleUploader}
@@ -132,6 +134,7 @@ export default class App extends React.Component {
                                 />
                             )}
                         />
+                        <Route path="/gallery" component={Gallery} />
                         <Route path="/find/users" component={FindPeople} />
                         <Route path="/friends" component={Friends} />
                         <Route path="/chat" component={Chat} />

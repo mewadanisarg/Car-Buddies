@@ -160,6 +160,7 @@ footer {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 .app-profile-container {
@@ -175,6 +176,12 @@ footer {
     align-items: center;
     margin-top: 20px;
     margin-left: 15px;
+    width: 600px;
+    height: auto;
+    background-color: lightgrey;
+    border: 2px solid rgb(109, 106, 106);
+    border-radius: 10px;
+    padding-bottom: 15px;
 }
 .bio-draft-container {
     display: contents;
@@ -183,6 +190,9 @@ footer {
 }
 .biosedit-btn {
     align-items: center;
+}
+.show-bio {
+    width: 50%;
 }
 
 .large-profile-photo {

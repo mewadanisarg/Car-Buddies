@@ -25,10 +25,7 @@ export default class BioEditor extends Component {
     submitBio(e) {
         console.log("Save button was clicked.. And its working Fine.! ");
         e.preventDefault(); // *! To prevent refresh of the page
-        // if (!this.state.biodraft) {
-        //     this.toggleTextArea();
-        //     return;
-        // }
+
         axios
             .post("/update-UserBio", {
                 bio: this.state.biodraft,
@@ -59,7 +56,7 @@ export default class BioEditor extends Component {
 
     render() {
         return (
-            <div className="bio-draft-container">
+            <div className="bio-draft-container ">
                 {/** if there is no text editor and no bio */}
                 {!this.props.bio && !this.state.showTextArea && (
                     <>

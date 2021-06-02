@@ -44,6 +44,12 @@ export default function reducer(state = {}, action) {
             chatMessages: [...state.chatMessages, action.message],
         };
     }
+    if (action.type === "PRIVATE_MESSAGES") {
+        state = {
+            ...state,
+            private: action.data.reverse(),
+        };
+    }
 
     return state;
 }

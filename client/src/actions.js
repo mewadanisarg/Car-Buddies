@@ -65,3 +65,10 @@ export async function chatMessage(message) {
         message,
     };
 }
+
+export async function privateMessage(message) {
+    return {
+        type: "PRIVATE_MESSAGES",
+        data: message,
+    };
+}

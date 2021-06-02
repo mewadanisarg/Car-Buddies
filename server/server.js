@@ -29,6 +29,10 @@ const {
     deleteUsersInfo,
     deleteUsersConnection,
     deleteUsersChats,
+    insertImages,
+    recentPrivateMessage,
+    newPrivateMessage,
+    getAllImages,
 } = require("./db");
 const s3 = require("../s3");
 const { s3Url } = require("../config.json");
@@ -489,11 +493,56 @@ app.get("/friendsrequest+.json", async (req, res) => {
     }
 });
 
+// Photo Gallery
+
+app.post("/gallery", uploader.single("file"), s3.upload, (req, res) => {
+    console.log("Gallery post route is working:");
+    console.log("req.body:", req.body);
+    console.log("req.file:", req.file);
+
+    if (req.file) {
+        // this will run if everything worked
+        const user_id = req.session.userId;
+        const { filename } = req.file;
+        const fullUrl = s3Url + filename;
+        console.log("fullUrl:", fullUrl);
+        //insert into images
+        insertImages(fullUrl, user_id)
+            .then((results) => {
+                console.log("results:", results);
+                res.json(results.rows[0]);
+            })
+            .catch((error) => {
+                console.log("Error in POST inserting file req.file", error);
+            });
+        //send back a reponse using res.json
+    } else {
+        res.status(500).json({
+            msg: "No file uploaded",
+        });
+    }
+});
+
+app.get("/gallery", (req, res) => {
+    console.log("A GET request was made to /images route");
+    getAllImages()
+        .then((data) => {
+            //logging the data
+            console.log("data", data);
+            res.json({
+                images: data.rows, // storing the images data in image
+            });
+        })
+        .catch((error) => {
+            console.log("Error in getting the image from DataBase:", error);
+        });
+});
+
 // Delete Account Route
 
 app.post("/delete-account", async (req, res) => {
     const { userId } = req.session;
-    console.log("userId:", userId);
+    // console.log("userId:", userId);
     try {
         const result = await getUserInfo(userId);
         result.rows[0].img_url && (await s3.delete(result.rows[0].img_url));
@@ -578,5 +627,42 @@ io.on("connection", function (socket) {
         } catch (error) {
             console.log("Error in adding the message into chat-box", error);
         }
+    });
+    // Get Recent Private Messages..!!
+    socket.on("get ten recent private messages", (user) => {
+        recentPrivateMessage(userId, user.id)
+            .then(({ rows }) => {
+                console.log("rows from db.infoNewMessage", rows);
+                socket.emit("recent messages incoming", rows);
+                // io.to(onlineUsers[user.id]).emit("private message", rows);
+            })
+            .catch((error) =>
+                console.log(
+                    "error in socket on getting recent private messages",
+                    error
+                )
+            );
+    });
+    // Private Messages
+    socket.on("private message", (message) => {
+        console.log("Inside socket.on private message: ", message);
+        newPrivateMessage(userId, message.recipient_id, message.message)
+            .then(() => {
+                recentPrivateMessage(userId, message.recipient_id)
+                    .then(({ rows }) => {
+                        console.log("Private Messages: ", rows);
+                        socket.emit("sent message", rows);
+                        io.to(onlineUsers[message.recipient_id]).emit(
+                            "private messages",
+                            rows
+                        );
+                    })
+                    .catch((error) =>
+                        console.log("error in recentPrivateMessag: ", error)
+                    );
+            })
+            .catch((error) =>
+                console.log("error in newPrivateMessage: ", error)
+            );
     });
 });
