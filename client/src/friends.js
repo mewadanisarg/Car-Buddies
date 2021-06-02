@@ -22,7 +22,7 @@ export default function Friends() {
     );
 
     useEffect(() => {
-        (!friends || !requests) && dispatch(seeFriendsRequest());
+        dispatch(seeFriendsRequest());
     }, []);
 
     if (!friends || !requests) {

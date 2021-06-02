@@ -1,13 +1,13 @@
+// import React from "react";
 import axios from "./axios";
 import FriendButton from "./friends-btn";
 import { socket } from "./socket";
 // import { Link } from "react-router-dom";
 // import Private from "./privatechat";
-import { useState, useEffect, useRef, useReducer } from "react";
+import { useState, useEffect } from "react";
 
 export default function OtherProfile(props) {
     const [user, setUser] = useState({});
-    const elemRef = useRef();
 
     useEffect(() => {
         (async () => {
@@ -38,9 +38,6 @@ export default function OtherProfile(props) {
                 props.history.push("/");
             }
         })();
-        const newScrollTop =
-            elemRef.current.scrollHeight - elemRef.current.clientHeight;
-        elemRef.current.scrollTop = newScrollTop;
     }, []);
 
     return (
@@ -54,28 +51,6 @@ export default function OtherProfile(props) {
             )}
             {/*<Link to={"/find/users"}>Search users</Link>*/}
             <FriendButton id={props.match.params.id} />
-            <div className="private-chat-container" ref={elemRef}>
-                <h3 className="chatting-to">Chat with {user.first}</h3>
-                {privateMessage &&
-                    privateMessage.map((privateMessage, index) => (
-                        <div className="" key={index}>
-                            <Link to={`/user/${privateMessage.sender_id}`}>
-                                <p className="textPrivate">
-                                    {privateMessage.first_name}
-                                    {"  "}
-                                </p>
-                            </Link>
-                            <p className="privateMessage">
-                                {privateMessage.message}
-                            </p>
-                        </div>
-                    ))}
-            </div>
-            <textarea
-                placeholder="Private Message"
-                className="pvt-chat-txtarea"
-                onKeyDown={keyCheck}
-            ></textarea>
         </div>
     );
 }

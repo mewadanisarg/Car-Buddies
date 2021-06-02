@@ -124,10 +124,16 @@ module.exports.getNewlyAddedUser = () => {
 
 module.exports.getUsersByName = (nameSearch) => {
     console.log("Inside module.exports.getUsersByName:", nameSearch);
-    const q = `SELECT * FROM users WHERE first_name ILIKE $1`;
+    const q = `SELECT * FROM users WHERE car_maker ILIKE $1`;
     const params = [nameSearch + "%"];
     return db.query(q, params);
 };
+// module.exports.getCarByName = (carSearch) => {
+//     console.log("Inside module.exports.getCarByName:", carSearch);
+//     const q = `SELECT * FROM users WHERE car_maker ILIKE $1`;
+//     const params = [carSearch + "%"];
+//     return db.query(q, params);
+// };
 
 // Part 8 for frienship connection
 
