@@ -3,16 +3,16 @@ import axios from "./axios";
 export default class Gallery extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = { images: [] };
     }
     componentDidMount() {
         console.log("Gallery Component just mounted..!", this.props);
         axios
-            .get("/image")
+            .get("/gallery.json")
             .then((response) => {
                 // console.log("response.data:", response.data);
-                this.state({
-                    url: response.data.images,
+                this.setState({
+                    images: response.data.images,
                 });
             })
             .catch((error) => {
@@ -70,9 +70,11 @@ export default class Gallery extends Component {
                     >
                         Upload Image
                     </button>
-                    {/*{this.state.images.map((image) => {
-                        return <img />;
-                    })}*/}
+
+                    {this.state.images.map((image) => {
+                        console.log("image:", image);
+                        return <img key={image.id} src={image.url} />;
+                    })}
                 </div>
             </>
         );

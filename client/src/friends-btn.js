@@ -37,7 +37,7 @@ export default function FriendsButton({ id }) {
                 btnText: "Decline request",
                 connectingUser: id,
             });
-            setButtonText("Add Freind");
+            setButtonText("Add Friend");
         } catch (error) {
             console.log(("Error in decling friend request", error));
         }
@@ -45,7 +45,10 @@ export default function FriendsButton({ id }) {
     console.log("ButtonText:", buttonText);
     return (
         <>
-            <button className="friends-btn" onClick={handleAddFriend}>
+            <button
+                className="friends-btn active:outline-none bg-gray-200 font-bold rounded-full w-3/5 mt-6 p-2 duration-200 hover:bg-gray-300 hover:text-gray-700"
+                onClick={handleAddFriend}
+            >
                 {buttonText}
             </button>
             {buttonText === "Accept request" && (

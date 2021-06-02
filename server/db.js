@@ -229,8 +229,11 @@ module.exports.insertImages = (url, userId) => {
     const params = [url, userId];
     return db.query(q, params);
 };
-module.exports.getAllImages = () => {
-    return db.query(`SELECT * FROM gallery ORDER BY created_at DESC LIMIT 6`);
+module.exports.getAllImages = (userId) => {
+    return db.query(
+        `SELECT * FROM gallery WHERE user_id =$1 ORDER BY created_at DESC LIMIT 6`,
+        [userId]
+    );
 };
 
 //Private Message
@@ -240,7 +243,7 @@ module.exports.recentPrivateMessage = (sender_id, recipient_id) => {
         sender_id,
         recipient_id
     );
-    const q = `(SELECT privateMessage.sender_id, privateMessage.recipient_id, privateMessage.message, privateMessage.created_at, users.imageurl, users.first_name, users.last_name
+    const q = `(SELECT privateMessage.sender_id, privateMessage.recipient_id, privateMessage.message, privateMessage.created_at, users.img_url, users.first_name, users.last_name
         FROM privateMessage
         JOIN users
         ON privateMessage.sender_id = users.id

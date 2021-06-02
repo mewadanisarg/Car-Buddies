@@ -1,4 +1,4 @@
-import { socket } from "./sockets";
+import { socket } from "./socket";
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
@@ -15,7 +15,7 @@ export default function Private({ id, first }) {
 
     useEffect(() => {
         if (id && !show) {
-            socket.emit("get recent private messages", {
+            socket.emit("get ten recent private messages", {
                 id: id,
             });
             setShow(true);

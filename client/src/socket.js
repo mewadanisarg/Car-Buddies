@@ -23,6 +23,7 @@ export const init = (store) => {
     });
 
     socket.on("recent messages incoming", (message) => {
+        console.log("recent messages recevied", message);
         store.dispatch(privateMessage(message));
     });
 };

@@ -29,10 +29,7 @@ class MenuLinks extends React.Component {
                     text: "Message",
                     link: "/chat",
                 },
-                {
-                    text: "Private Chat",
-                    link: "/private-chat",
-                },
+
                 {
                     text: "Delete Account",
                     link: "/delete-account",

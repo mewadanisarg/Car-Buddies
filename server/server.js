@@ -523,7 +523,7 @@ app.post("/gallery", uploader.single("file"), s3.upload, (req, res) => {
     }
 });
 
-app.get("/gallery", (req, res) => {
+app.get("/gallery.json", (req, res) => {
     console.log("A GET request was made to /images route");
     getAllImages()
         .then((data) => {
@@ -632,7 +632,7 @@ io.on("connection", function (socket) {
     socket.on("get ten recent private messages", (user) => {
         recentPrivateMessage(userId, user.id)
             .then(({ rows }) => {
-                console.log("rows from db.infoNewMessage", rows);
+                console.log("rows from get ten recent private messages", rows);
                 socket.emit("recent messages incoming", rows);
                 // io.to(onlineUsers[user.id]).emit("private message", rows);
             })

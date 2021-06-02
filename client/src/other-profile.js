@@ -1,8 +1,9 @@
 import React from "react";
 import axios from "./axios";
 import FriendButton from "./friends-btn";
+import { socket } from "./socket";
 import { Link } from "react-router-dom";
-
+import Private from "./privatechat";
 export default class OtherProfile extends React.Component {
     constructor() {
         super();
@@ -10,8 +11,13 @@ export default class OtherProfile extends React.Component {
     }
 
     async componentDidMount() {
-        console.log("OtherProfile is Mounted..! Wohoo");
         const { id } = this.props.match.params;
+        // Private Chat on others Profile Page..! 
+        socket.emit("get ten recent private messages", {
+            id: id,
+        });
+        //----------------------------------------------//
+        console.log("OtherProfile is Mounted..! Wohoo");
         console.log("id: ", id);
         console.log("this.props in OtherProfile: ", this.props);
         try {
@@ -43,8 +49,9 @@ export default class OtherProfile extends React.Component {
                         <h4> {this.state.bio} </h4>
                     </>
                 )}
-                <Link to={"/find/users"}>Search users</Link>
+                {/*<Link to={"/find/users"}>Search users</Link>*/}
                 <FriendButton id={this.props.match.params.id} />
+                
             </div>
         );
     }
