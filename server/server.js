@@ -482,7 +482,7 @@ app.post("/friendsconnection", async (req, res) => {
 
 // Part-9 Friends and Request
 
-app.get("/friendsrequest+.json", async (req, res) => {
+app.get("/friendsrequest.json", async (req, res) => {
     const { userId } = req.session;
     try {
         const { rows } = await seeFriendsRequest(userId);
