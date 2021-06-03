@@ -7,17 +7,17 @@ export default class OthersGallery extends Component {
         this.state = { images: [] };
     }
     async componentDidMount() {
-        console.log("OthersUsersGallery Component just mounted..!", this.props);
+        // console.log("OthersUsersGallery Component just mounted..!", this.props);
         const { id } = this.props;
-        console.log("id: ", id);
-        console.log("this.props in OtherProfile: ", this.props);
+        // console.log("id: ", id);
+        // console.log("this.props in OtherProfile: ", this.props);
         try {
             const { data } = await axios.get(`/othersUserGallery/${id}`);
-            console.log("Data from others gallery component:", data);
+            // console.log("Data from others gallery component:", data);
             this.setState({
                 images: data,
             });
-            console.log("this.state:", this.state);
+            // console.log("this.state:", this.state);
         } catch (error) {
             console.log(
                 "error in GET req from /OthersUserGallery componentDidMount",
@@ -29,15 +29,15 @@ export default class OthersGallery extends Component {
         if (!this.state) {
             return null;
         }
-        console.log("This.state inside render:", this.state);
+        // console.log("This.state inside render:", this.state);
         return (
             <>
-                <h1>Hello, I am Others Gallery Component..! </h1>
                 <div className="galleryphoto-container">
+                    <h1>Hello, I am Others Gallery Component..! </h1>
                     <div className="gallery-img">
                         {this.state.images &&
                             this.state.images.map((image) => {
-                                console.log("image:", image);
+                                // console.log("image:", image);
                                 return (
                                     <>
                                         <img

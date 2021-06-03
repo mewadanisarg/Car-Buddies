@@ -4,7 +4,7 @@ export async function seeFriendsRequest() {
     console.log("SeeFriendRequest: ");
     try {
         const { data } = await axios.get("/friendsrequest.json");
-        console.log("Data from Friends Request route: ", data);
+        // console.log("Data from Friends Request route: ", data);
         return {
             type: "FRIENDS_REQUESTS",
             arrayofFriendRequest: data,
@@ -16,7 +16,7 @@ export async function seeFriendsRequest() {
 
 export async function acceptFriendRequest(id) {
     const btnText = "Accept request";
-    console.log("Accept Request Button CLicked");
+    // console.log("Accept Request Button CLicked");
     try {
         const { data } = await axios.post("/friendsconnection", {
             connectingUser: id,
@@ -67,7 +67,7 @@ export async function chatMessage(message) {
 }
 
 export async function privateMessage(message) {
-    console.log("message from privateMessage(message) action.js: ", message);
+    // console.log("message from privateMessage(message) action.js: ", message);
     return {
         type: "PRIVATE_MESSAGES",
         data: message,

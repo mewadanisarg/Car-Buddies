@@ -159,6 +159,7 @@ export default class App extends React.Component {
                         toggleUploader={this.toggleUploader}
                     />
                 )}
+                <footer>&copy; Nisarg Mewada, Social Network 2021-22.</footer>
             </div>
         );
     }

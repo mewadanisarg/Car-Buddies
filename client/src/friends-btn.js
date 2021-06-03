@@ -46,7 +46,7 @@ export default function FriendsButton({ id }) {
     return (
         <>
             <button
-                className="friends-btn active:outline-none bg-gray-200 font-bold rounded-full w-3/5 mt-6 p-2 duration-200 hover:bg-gray-300 hover:text-gray-700"
+                className="friends-btn active:outline-none bg-gray-200 font-bold rounded-full w-150px mt-6 p-2 duration-200 hover:bg-gray-300 hover:text-gray-700"
                 onClick={handleAddFriend}
             >
                 {buttonText}

@@ -554,14 +554,14 @@ app.get("/othersUserGallery/:id", async (req, res) => {
     }
     try {
         const { rows } = await getOthersImages(id);
-        console.log("Rows in /otherUserGalerry route", rows);
+        console.log("Rows in /otherUserGallery route", rows);
         if (rows.length === 0) {
             res.status(400).json({
                 error: "Please check the written url, it does not exist",
             });
             return;
         }
-        res.json(rows);
+        res.json(rows); //Sending the response from the server.!
     } catch (error) {
         console.log("Error in getOthersImages route:", error);
     }
