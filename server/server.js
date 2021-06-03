@@ -525,7 +525,8 @@ app.post("/gallery", uploader.single("file"), s3.upload, (req, res) => {
 
 app.get("/gallery.json", (req, res) => {
     console.log("A GET request was made to /images route");
-    getAllImages()
+    const { userId } = req.session;
+    getAllImages(userId)
         .then((data) => {
             //logging the data
             console.log("data", data);
