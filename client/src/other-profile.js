@@ -7,6 +7,7 @@ import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 let newDate = new Date();
+import OthersGallery from "./other-gallery";
 
 export default function OtherProfile(props) {
     const [user, setUser] = useState({});
@@ -92,6 +93,7 @@ export default function OtherProfile(props) {
             )}
             {/*<Link to={"/find/users"}>Search users</Link>*/}
             <FriendButton id={props.match.params.id} />
+            <OthersGallery id={props.match.params.id} />
             {
                 <div className="private-chat-box">
                     {privateMessage &&

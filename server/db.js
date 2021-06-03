@@ -128,12 +128,6 @@ module.exports.getUsersByName = (nameSearch) => {
     const params = [nameSearch + "%"];
     return db.query(q, params);
 };
-// module.exports.getCarByName = (carSearch) => {
-//     console.log("Inside module.exports.getCarByName:", carSearch);
-//     const q = `SELECT * FROM users WHERE car_maker ILIKE $1`;
-//     const params = [carSearch + "%"];
-//     return db.query(q, params);
-// };
 
 // Part 8 for frienship connection
 
@@ -230,6 +224,7 @@ module.exports.deleteUsersChats = (userId) => {
     return db.query(q, params);
 };
 
+// Gallery Component
 module.exports.insertImages = (url, userId) => {
     const q = `INSERT INTO gallery (url, user_id) VALUES ($1,$2) RETURNING *`;
     const params = [url, userId];
@@ -239,6 +234,14 @@ module.exports.getAllImages = (userId) => {
     return db.query(
         `SELECT * FROM gallery WHERE user_id =$1 ORDER BY created_at DESC LIMIT 6`,
         [userId]
+    );
+};
+
+module.exports.getOthersImages = (othersId) => {
+    console.log("Inside module.exports.getOthersImages", othersId);
+    return db.query(
+        `SELECT * FROM gallery WHERE user_id =$1 ORDER BY created_at DESC LIMIT 6`,
+        [othersId]
     );
 };
 

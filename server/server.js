@@ -33,6 +33,7 @@ const {
     recentPrivateMessage,
     newPrivateMessage,
     getAllImages,
+    getOthersImages,
 } = require("./db");
 const s3 = require("../s3");
 const { s3Url } = require("../config.json");
@@ -261,7 +262,7 @@ app.post("/password/reset/start", (req, res) => {
 
 app.post("/password/reset/verify", (req, res) => {
     const { email, password, code } = req.body;
-    console.log("const{email, password, code} = req.body:", req.body);
+    // console.log("const{email, password, code} = req.body:", req.body);
     selectCode(email)
         .then((result) => {
             console.log("result.rows:", result.rows);
@@ -299,17 +300,17 @@ app.post("/password/reset/verify", (req, res) => {
 
 // Image POST route
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
-    console.log(" POST req to /upload is working..!");
-    console.log(req.body);
-    console.log("req.file:", req.file);
+    // console.log(" POST req to /upload is working..!");
+    // console.log(req.body);
+    // console.log("req.file:", req.file);
     if (req.file) {
         const { userId } = req.session;
         const { filename } = req.file;
         const fullUrl = s3Url + filename;
-        console.log("fullUrl:", fullUrl);
+        // console.log("fullUrl:", fullUrl);
         uploadProfilePic(fullUrl, userId)
             .then(({ rows }) => {
-                console.log(("rows:", rows));
+                // console.log(("rows:", rows));
                 res.json(rows[0]);
             })
             .catch((error) => {
@@ -336,9 +337,9 @@ app.get("/user", (req, res) => {
 });
 
 app.post("/update-UserBio", (req, res) => {
-    console.log("a POST req was made to /update-UserBio route.!");
-    console.log("req.body: ", req.body);
-    console.log("req.session: ", req.session);
+    // console.log("a POST req was made to /update-UserBio route.!");
+    // console.log("req.body: ", req.body);
+    // console.log("req.session: ", req.session);
     const { bio } = req.body;
     const { userId } = req.session;
     updateUserBio(bio, userId)
@@ -353,10 +354,10 @@ app.post("/update-UserBio", (req, res) => {
 //Other-Profile Get route
 
 app.get("/other-user/:id", async (req, res) => {
-    console.log("a GET req was made to /other-user/:id route");
-    console.log("req.params:", req.params);
+    // console.log("a GET req was made to /other-user/:id route");
+    // console.log("req.params:", req.params);
     const { id } = req.params;
-    console.log("A GET req was made to id for other users:", id);
+    // console.log("A GET req was made to id for other users:", id);
     if (parseInt(id) === req.session.userId) {
         res.status(400).json({
             error: "Cannot access your own url",
@@ -382,7 +383,7 @@ app.get("/find/users.json", async (req, res) => {
     console.log("A GET req was made from /find/user route");
     try {
         const { rows } = await getNewlyAddedUser();
-        console.log("app.get for finding users: ", rows.length);
+        // console.log("app.get for finding users: ", rows.length);
         res.json(rows);
     } catch (error) {
         console.log("Inside Catch of GET req of /find/users", error);
@@ -395,10 +396,10 @@ app.get("/find/users.json", async (req, res) => {
 app.post("/find/users.json", async (req, res) => {
     console.log("A POST req made to /find/users ");
     const { searchField } = req.body;
-    console.log("searchField: ", searchField);
+    // console.log("searchField: ", searchField);
     try {
         const { rows } = await getUsersByName(searchField);
-        console.log("{rows} : ", rows);
+        // console.log("{rows} : ", rows);
         res.json(rows);
     } catch (error) {
         console.log(
@@ -415,11 +416,11 @@ app.post("/find/users.json", async (req, res) => {
 
 app.get("/friendsconnection/:connectingUser", async (req, res) => {
     const loggedInUser = req.session.userId;
-    console.log("loggedInUser:", req.session.userId);
+    // console.log("loggedInUser:", req.session.userId);
     const { connectingUser } = req.params;
-    console.log("Connecting to user:", req.params);
+    // console.log("Connecting to user:", req.params);
     const { rows } = await getConnected(loggedInUser, connectingUser);
-    console.log("Rows into /friendsconnection/:connectingUser", rows);
+    // console.log("Rows into /friendsconnection/:connectingUser", rows);
     if (rows.length === 0) {
         return res.json({
             btnText: "Add Friend",
@@ -446,8 +447,8 @@ app.get("/friendsconnection/:connectingUser", async (req, res) => {
 app.post("/friendsconnection", async (req, res) => {
     const loggedInUser = req.session.userId;
     const { btnText, connectingUser } = req.body;
-    console.log("loggedInuser : ", req.session.userId);
-    console.log("req.body: ", req.body);
+    // console.log("loggedInuser : ", req.session.userId);
+    // console.log("req.body: ", req.body);
 
     try {
         if (btnText === "Add Friend") {
@@ -531,12 +532,39 @@ app.get("/gallery.json", (req, res) => {
             //logging the data
             console.log("data", data);
             res.json({
-                images: data.rows, // storing the images data in image
+                images: data.rows,
             });
         })
         .catch((error) => {
             console.log("Error in getting the image from DataBase:", error);
         });
+});
+
+app.get("/othersUserGallery/:id", async (req, res) => {
+    console.log("a GET req was made to /othersGallery.json route");
+    console.log("req.params:", req.params);
+    const { id } = req.params;
+    console.log("A GET req was made to id for other users:", id);
+    console.log("req.session.userId", req.session.userId);
+    if (parseInt(id) === req.session.userId) {
+        res.status(400).json({
+            error: "Cannot access your own url",
+        });
+        return;
+    }
+    try {
+        const { rows } = await getOthersImages(id);
+        console.log("Rows in /otherUserGalerry route", rows);
+        if (rows.length === 0) {
+            res.status(400).json({
+                error: "Please check the written url, it does not exist",
+            });
+            return;
+        }
+        res.json(rows);
+    } catch (error) {
+        console.log("Error in getOthersImages route:", error);
+    }
 });
 
 // Delete Account Route
@@ -585,11 +613,11 @@ io.on("connection", function (socket) {
         return socket.disconnect(true);
     }
     const userId = socket.request.session.userId;
-    console.log("userId from io.on in server: ", userId);
+    // console.log("userId from io.on in server: ", userId);
 
     onlineUsers[socket.id] = userId;
 
-    console.log(`User ${userId} just connected with socket ${socket.id}`);
+    // console.log(`User ${userId} just connected with socket ${socket.id}`);
     socket.on("disconnect", () => {
         console.log(
             `User ${userId} just disconnected with socket ${socket.id}`
@@ -601,7 +629,7 @@ io.on("connection", function (socket) {
     (async () => {
         try {
             const { rows } = await getRecentChats();
-            console.log("ROWS: ", rows);
+            // console.log("ROWS: ", rows);
             io.sockets.emit("chatMessages", rows.reverse());
         } catch (error) {
             console.log("error: ", error);
@@ -609,13 +637,13 @@ io.on("connection", function (socket) {
     })();
     socket.on("chatmessage", async (chat) => {
         const message = chat;
-        console.log("Chats from chat route", message);
+        // console.log("Chats from chat route", message);
 
         try {
             const response = await insertMessages(message, userId);
-            console.log("response from chat route: from server.js ", response);
+            // console.log("response from chat route: from server.js ", response);
             const { rows } = await getOtherUserProfile(userId);
-            console.log("rows of the chat route from server.js: ", rows);
+            // console.log("rows of the chat route from server.js: ", rows);
 
             const chatForData = {
                 essage: response.rows[0].message,
@@ -633,7 +661,7 @@ io.on("connection", function (socket) {
     socket.on("get ten recent private messages", (user) => {
         recentPrivateMessage(userId, user.id)
             .then(({ rows }) => {
-                console.log("rows from get ten recent private messages", rows);
+                // console.log("rows from get ten recent private messages", rows);
                 socket.emit("recent messages incoming", rows);
                 // io.to(onlineUsers[user.id]).emit("private message", rows);
             })
@@ -646,12 +674,12 @@ io.on("connection", function (socket) {
     });
     // Private Messages
     socket.on("private message", (message) => {
-        console.log("Inside socket.on private message: ", message);
+        // console.log("Inside socket.on private message: ", message);
         newPrivateMessage(userId, message.recipient_id, message.message)
             .then(() => {
                 recentPrivateMessage(userId, message.recipient_id)
                     .then(({ rows }) => {
-                        console.log("Private Messages: ", rows);
+                        // console.log("Private Messages: ", rows);
                         socket.emit("sent message", rows);
                         io.to(onlineUsers[message.recipient_id]).emit(
                             "private messages",

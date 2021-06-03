@@ -1,5 +1,6 @@
 import { Component } from "react";
 import axios from "./axios";
+
 export default class Gallery extends Component {
     constructor(props) {
         super(props);
@@ -68,7 +69,6 @@ export default class Gallery extends Component {
                             flex align-center
 
                             active:outline-none bg-gray-200 font-bold rounded-full w-24 mt-6 p-2 duration-200 hover:bg-gray-300 hover:text-gray-700"
-                            
                             onClick={(e) => this.submitFile(e)}
                         >
                             Upload Image
@@ -79,7 +79,11 @@ export default class Gallery extends Component {
                             console.log("image:", image);
                             return (
                                 <>
-                                    <img className="car-img" key={image.id} src={image.url} />
+                                    <img
+                                        className="car-img"
+                                        key={image.id}
+                                        src={image.url}
+                                    />
                                 </>
                             );
                         })}
