@@ -6,7 +6,7 @@ export default class Gallery extends Component {
         this.state = { images: [] };
     }
     componentDidMount() {
-        console.log("Gallery Component just mounted..!", this.props);
+        // console.log("Gallery Component just mounted..!", this.props);
         axios
             .get("/gallery.json")
             .then((response) => {
@@ -29,7 +29,7 @@ export default class Gallery extends Component {
         });
     }
     submitFile(e) {
-        console.log("Upload submit was clicked..! Woho");
+        // console.log("Upload submit was clicked..! Woho");
         e.preventDefault();
         console.log("This.state.file: ", this.state);
         var formData = new FormData();
@@ -38,7 +38,7 @@ export default class Gallery extends Component {
         axios
             .post("/gallery", formData)
             .then((response) => {
-                console.log("response received from server!!");
+                // console.log("response received from server!!");
                 console.log("response.data:", response.data);
             })
             .catch((error) => {
@@ -61,20 +61,25 @@ export default class Gallery extends Component {
                         onChange={(e) => this.handleChange(e)}
                         multiple
                     ></input>
-                    <button
-                        type="button"
-                        className="active:outline-none bg-gray-200 font-bold rounded-full w-3/5 mt-6 p-2 duration-200 hover:bg-gray-300 hover:text-gray-700"
-                        // onClick={(e) => this.submitFile(e.target.files)}
-                        onClick={(e) => this.submitFile(e)}
-                    >
-                        Upload Image
-                    </button>
                     <div>
+                        <button
+                            type="button"
+                            className="
+                            flex align-center
+
+                            active:outline-none bg-gray-200 font-bold rounded-full w-24 mt-6 p-2 duration-200 hover:bg-gray-300 hover:text-gray-700"
+                            
+                            onClick={(e) => this.submitFile(e)}
+                        >
+                            Upload Image
+                        </button>
+                    </div>
+                    <div className="gallery-img">
                         {this.state.images.map((image) => {
                             console.log("image:", image);
                             return (
                                 <>
-                                    <img key={image.id} src={image.url} />
+                                    <img className="car-img" key={image.id} src={image.url} />
                                 </>
                             );
                         })}

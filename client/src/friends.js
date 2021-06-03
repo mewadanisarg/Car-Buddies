@@ -39,7 +39,7 @@ export default function Friends() {
                             friends.map((user) => {
                                 const { id, first_name, last_name, img_url } =
                                     user;
-                                console.log("wannabefreinds list: ", user);
+                                // console.log("wannabefreinds list: ", user);
                                 return (
                                     <>
                                         <div className="other-profile">

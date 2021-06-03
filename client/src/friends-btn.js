@@ -8,7 +8,7 @@ export default function FriendsButton({ id }) {
         (async () => {
             try {
                 const { data } = await axios.get(`/friendsconnection/${id}`);
-                console.log("Data from freinds button :", data);
+                // console.log("Data from freinds button :", data);
                 setButtonText(data.btnText);
             } catch (error) {
                 console.log("Error in FriendsButton useState route", error);
@@ -17,7 +17,7 @@ export default function FriendsButton({ id }) {
     }, []);
 
     const handleAddFriend = async (e) => {
-        console.log("Button was clicked", handleAddFriend);
+        // console.log("Button was clicked", handleAddFriend);
         e.preventDefault();
         try {
             await axios.post("/friendsconnection", {
@@ -42,7 +42,7 @@ export default function FriendsButton({ id }) {
             console.log(("Error in decling friend request", error));
         }
     };
-    console.log("ButtonText:", buttonText);
+    // console.log("ButtonText:", buttonText);
     return (
         <>
             <button
