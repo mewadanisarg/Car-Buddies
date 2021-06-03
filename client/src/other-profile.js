@@ -4,10 +4,13 @@ import FriendButton from "./friends-btn";
 import { socket } from "./socket";
 // import { Link } from "react-router-dom";
 // import Private from "./privatechat";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useSelector } from "react";
 
 export default function OtherProfile(props) {
     const [user, setUser] = useState({});
+    const privateMessage = useSelector(
+        (state) => state.private && state.private
+    );
 
     useEffect(() => {
         (async () => {
@@ -51,6 +54,20 @@ export default function OtherProfile(props) {
             )}
             {/*<Link to={"/find/users"}>Search users</Link>*/}
             <FriendButton id={props.match.params.id} />
+            <div className="privatechat">
+                {privateMessage &&
+                    privateMessage.map((message) => {
+                        return (
+                            <>
+                                <p> {message.message}</p>
+                            </>
+                        );
+                    })}
+                <textarea
+                    placeholder="Private Message"
+                    className="pvt-chat-txtarea"
+                ></textarea>
+            </div>
         </div>
     );
 }

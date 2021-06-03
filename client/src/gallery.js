@@ -72,7 +72,11 @@ export default class Gallery extends Component {
                     <div>
                         {this.state.images.map((image) => {
                             console.log("image:", image);
-                            return <img key={image.id} src={image.url} />;
+                            return (
+                                <>
+                                    <img key={image.id} src={image.url} />
+                                </>
+                            );
                         })}
                     </div>
                 </div>

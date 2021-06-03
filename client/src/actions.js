@@ -67,6 +67,7 @@ export async function chatMessage(message) {
 }
 
 export async function privateMessage(message) {
+    console.log("message from privateMessage(message) action.js: ", message);
     return {
         type: "PRIVATE_MESSAGES",
         data: message,
