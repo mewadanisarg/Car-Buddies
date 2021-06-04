@@ -133,7 +133,9 @@ footer {
     bottom: 10px;
     left: 10px;
 }
-
+.app-log {
+    border: 1px solid black;
+}
 .main-app-container {
     display: flex;
     flex-direction: column;

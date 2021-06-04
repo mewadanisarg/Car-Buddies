@@ -11,12 +11,27 @@ import OthersGallery from "./other-gallery";
 
 export default function OtherProfile(props) {
     const [user, setUser] = useState({});
+    const [buttonText, setButtonText] = useState("");
     const elemRef = useRef();
     const privateMessage = useSelector(
         (state) => state.private && state.private
     );
     // console.log("Private Message", privateMessage);
+    useEffect(() => {
+        (async () => {
+            const { id } = props.match.params;
+            console.log("Props in otherProfile ", props);
+            try {
+                const { data } = await axios.get(`/friendsconnection/${id}`);
 
+                console.log("Data from friends button :", data);
+                setButtonText(data.btnText);
+                console.log("data.btnText in OtherProfile", data.btnText);
+            } catch (error) {
+                console.log("Error in FriendsButton useState route", error);
+            }
+        })();
+    }, []);
     useEffect(() => {
         (async () => {
             const { id } = props.match.params;
@@ -93,46 +108,48 @@ export default function OtherProfile(props) {
             )}
             {/*<Link to={"/find/users"}>Search users</Link>*/}
             <FriendButton id={props.match.params.id} />
-            
-            <div className="gal-chat-txt">
-                <OthersGallery id={props.match.params.id} />
-                <div className="private-chat">
-                    <div className="private-chat-box">
-                        {privateMessage &&
-                            privateMessage.map((message) => {
-                                const { id, img_url, created_at } = message;
-                                return (
-                                    <>
-                                        <img
-                                            className="chat-prof-image"
-                                            src={img_url}
-                                            alt={`${user.first} ${user.last}`}
-                                        />
-                                        <h4>
-                                            <Link to={`/user/${id}`}>
-                                                {" "}
-                                                {user.first} {user.last}{" "}
-                                            </Link>
-                                            <br />{" "}
-                                            <p>
-                                                {newDate.toLocaleString({
-                                                    created_at,
-                                                })}
-                                            </p>
-                                        </h4>
-                                        <p> {message.message}</p>
-                                    </>
-                                );
-                            })}
-                    </div>
 
-                    <textarea
-                        placeholder="Private Message"
-                        className="txtarea-chat"
-                        onKeyDown={handleKeyDown}
-                    ></textarea>
+            {buttonText === "Unfriend" && (
+                <div className="gal-chat-txt">
+                    <OthersGallery id={props.match.params.id} />
+                    <div className="private-chat">
+                        <div className="private-chat-box">
+                            {privateMessage &&
+                                privateMessage.map((message) => {
+                                    const { id, img_url, created_at } = message;
+                                    return (
+                                        <>
+                                            <img
+                                                className="chat-prof-image"
+                                                src={img_url}
+                                                alt={`${user.first} ${user.last}`}
+                                            />
+                                            <h4>
+                                                <Link to={`/user/${id}`}>
+                                                    {" "}
+                                                    {user.first} {user.last}{" "}
+                                                </Link>
+                                                <br />{" "}
+                                                <p>
+                                                    {newDate.toLocaleString({
+                                                        created_at,
+                                                    })}
+                                                </p>
+                                            </h4>
+                                            <p> {message.message}</p>
+                                        </>
+                                    );
+                                })}
+                        </div>
+
+                        <textarea
+                            placeholder="Private Message"
+                            className="txtarea-chat"
+                            onKeyDown={handleKeyDown}
+                        ></textarea>
+                    </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 }

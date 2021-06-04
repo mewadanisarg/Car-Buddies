@@ -21,9 +21,7 @@ export default class Uploader extends Component {
         e.preventDefault();
         console.log("This.state.file: ", this.state.file);
         var formData = new FormData();
-        /**
-         * ! we are using var it with defining bcoz it is from browser
-         */
+        
         formData.append("file", this.state.file);
         axios
             .post("/upload", formData)
