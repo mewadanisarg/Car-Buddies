@@ -24,7 +24,6 @@ main {
     height: 111px;
 }
 
-
 form {
     display: flex;
     justify-content: center;
@@ -231,10 +230,19 @@ footer {
     cursor: pointer;
 }
 .friends-acceptbtn-unfriendbtn {
+    background-color: rgb(158, 158, 158);
+    border: 2px solid black;
+    border-radius: 5px;
     height: 30px;
     width: 150px;
     font-size: 10px;
     padding: 0px;
+    margin: 5px;
+}
+.friends-acceptbtn-unfriendbtn:hover {
+    outline: darkgray 2px;
+    background-color: grey;
+    transition-duration: 1.5s ease-out;
 }
 
 .find-people-maincontainer {

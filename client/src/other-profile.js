@@ -93,6 +93,7 @@ export default function OtherProfile(props) {
             )}
             {/*<Link to={"/find/users"}>Search users</Link>*/}
             <FriendButton id={props.match.params.id} />
+            
             <div className="gal-chat-txt">
                 <OthersGallery id={props.match.params.id} />
                 <div className="private-chat">
