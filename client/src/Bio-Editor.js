@@ -73,7 +73,7 @@ export default class BioEditor extends Component {
                 {/** if there is bio then user can see or Edit the bio */}
                 {this.props.bio && (
                     <>
-                        <div>
+                        <div className="bio-text">
                             <h3 className="bio-h3">{this.props.bio}</h3>
                         </div>
                         <button

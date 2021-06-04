@@ -134,7 +134,10 @@ footer {
     left: 10px;
 }
 .app-log {
-    border: 1px solid black;
+    border-bottom: 3px double black;
+    /* display: block; */
+    position: sticky;
+    left: 50%;
 }
 .main-app-container {
     display: flex;
@@ -173,6 +176,23 @@ footer {
 }
 .show-bio {
     width: 50%;
+}
+
+.bio-text {
+    border: 2px solid #faf8f8;
+    border-radius: 10px;
+    margin: 10px;
+}
+.bio-text-otherprofile {
+    padding: 5px;
+    border: 3px solid #7a7a7a;
+    border-radius: 10px;
+    margin: 10px;
+}
+.img-otherprofile {
+    margin: 5px;
+    border: 2px solid black;
+    border-radius: 5px;
 }
 .bio-h3 {
     padding: 30px;

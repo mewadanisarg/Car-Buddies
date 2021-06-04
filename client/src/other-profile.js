@@ -20,13 +20,13 @@ export default function OtherProfile(props) {
     useEffect(() => {
         (async () => {
             const { id } = props.match.params;
-            console.log("Props in otherProfile ", props);
+            // console.log("Props in otherProfile ", props);
             try {
                 const { data } = await axios.get(`/friendsconnection/${id}`);
 
-                console.log("Data from friends button :", data);
+                // console.log("Data from friends button :", data);
                 setButtonText(data.btnText);
-                console.log("data.btnText in OtherProfile", data.btnText);
+                // console.log("data.btnText in OtherProfile", data.btnText);
             } catch (error) {
                 console.log("Error in FriendsButton useState route", error);
             }
@@ -102,8 +102,8 @@ export default function OtherProfile(props) {
             {user && (
                 <>
                     <h3>Hi, {`${user.first} ${user.last}`}</h3>
-                    <img src={user.imgUrl} alt={`${user.first} ${user.last}`} />
-                    <h4> {user.bio} </h4>
+                    <img className="img-otherprofile" src={user.imgUrl} alt={`${user.first} ${user.last}`} />
+                    <h4 className="bio-text-otherprofile"> {user.bio} </h4>
                 </>
             )}
             {/*<Link to={"/find/users"}>Search users</Link>*/}

@@ -52,7 +52,12 @@ export default function FriendsButton({ id }) {
                 {buttonText}
             </button>
             {buttonText === "Accept request" && (
-                <button onClick={handleDecline}>Decline request</button>
+                <button
+                    className="friends-btn active:outline-none bg-gray-200 font-bold rounded-full w-150px mt-6 p-2 duration-200 hover:bg-gray-300 hover:text-gray-700"
+                    onClick={handleDecline}
+                >
+                    Decline request
+                </button>
             )}
         </>
     );
