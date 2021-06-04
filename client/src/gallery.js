@@ -41,6 +41,7 @@ export default class Gallery extends Component {
             .then((response) => {
                 // console.log("response received from server!!");
                 console.log("response.data:", response.data);
+                this.setState({ images: [...this.state.images, response.data] });
             })
             .catch((error) => {
                 console.log(("error in POST /upload routes:", error));
@@ -78,13 +79,9 @@ export default class Gallery extends Component {
                         {this.state.images.map((image) => {
                             console.log("image:", image);
                             return (
-                                <>
-                                    <img
-                                        className="car-img"
-                                        key={image.id}
-                                        src={image.url}
-                                    />
-                                </>
+                                <div key={image.id}>
+                                    <img className="car-img" src={image.url} />
+                                </div>
                             );
                         })}
                     </div>

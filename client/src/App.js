@@ -76,6 +76,7 @@ export default class App extends React.Component {
             <div className="app-container">
                 <BrowserRouter>
                     <div>
+                        <img src="/Car Buddies.png" />
                         <Menu></Menu>
                         {/* <Link to="/">
                             <img

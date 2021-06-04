@@ -11,6 +11,10 @@ body {
     font-family: "Padauk", sans-serif;
     overflow: auto;
 }
+main {
+    overflow: auto;
+    padding-bottom: 50px;
+}
 
 .welcome-container {
     padding: 10px;
@@ -19,6 +23,7 @@ body {
     width: 600px;
     height: 111px;
 }
+
 
 form {
     display: flex;
@@ -124,6 +129,7 @@ img {
 }
 
 footer {
+    position: fixed;
     margin-top: 20px;
     bottom: 10px;
     left: 10px;
@@ -141,7 +147,7 @@ footer {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 120px;
+    margin-top: 100px;
 }
 .profile-container {
     display: flex;
@@ -167,7 +173,9 @@ footer {
 .show-bio {
     width: 50%;
 }
-
+.bio-h3 {
+    padding: 30px;
+}
 .large-profile-photo {
     width: 100px;
     height: 100px;
@@ -206,6 +214,7 @@ footer {
     border: 2px solid black;
     border-radius: 10px;
 }
+
 .friendsrequest-main-container {
     margin: 15px;
     padding: 10px;
@@ -267,6 +276,9 @@ textarea {
     resize: vertical;
 }
 .private-chat {
+    width: 350px;
+    height: 450px;
+    margin-top: 10px;
     margin-left: 10px;
     border: 2px solid darkslategray;
     border-radius: 10px;
@@ -278,14 +290,14 @@ textarea {
     border: 2px lightgray dotted;
     border-radius: 10px;
     overflow-y: auto;
-    width: 350px;
-    height: 400px;
+    width: 325px;
+    height: 430px;
     border-radius: 10px;
 }
 .txtarea-chat {
     width: 350px;
     margin-top: 15px;
-    margin-left: 8px;
+    /* margin-left: 8px; */
     border: 2px solid black;
     border-radius: 5px;
 }

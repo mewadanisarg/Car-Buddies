@@ -33,7 +33,6 @@ export default class OthersGallery extends Component {
         return (
             <>
                 <div className="galleryphoto-container">
-                    <h1>Hello, I am Others Gallery Component..! </h1>
                     <div className="gallery-img">
                         {this.state.images &&
                             this.state.images.map((image) => {

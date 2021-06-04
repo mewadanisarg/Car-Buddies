@@ -31,7 +31,7 @@ export default function Profile(props) {
                     {props.first} {props.last}
                 </h3>
                 <br />
-                <h4>My Car Info:</h4>
+                <h4>My Bio:</h4>
                 <BioEditor bio={props.bio} setbio={props.setbio} />{" "}
             </>
         </div>

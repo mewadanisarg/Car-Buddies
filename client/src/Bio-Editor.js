@@ -74,7 +74,7 @@ export default class BioEditor extends Component {
                 {this.props.bio && (
                     <>
                         <div>
-                            <h3>{this.props.bio}</h3>
+                            <h3 className="bio-h3">{this.props.bio}</h3>
                         </div>
                         <button
                             className="biosedit-btn"
