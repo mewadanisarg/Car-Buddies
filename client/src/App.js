@@ -11,7 +11,7 @@ import FindPeople from "./find-people";
 import Friends from "./friends";
 import Chat from "./chat";
 import { Link } from "react-router-dom";
-// import Menu from "./sidebar";
+
 import DeleteAccount from "./deleteaccount";
 import Gallery from "./gallery";
 
@@ -76,7 +76,6 @@ export default class App extends React.Component {
             <div className="app-container">
                 <BrowserRouter>
                     <div>
-                        {/* <Menu></Menu>*/}
                         <nav className="navbar">
                             <Link to="/">
                                 <img
