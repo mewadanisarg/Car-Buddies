@@ -74,6 +74,7 @@ export default function FindPeople() {
                                 <div className="newusers-photo" key={index}>
                                     <Link to={`/user/${user.id}`}>
                                         <img
+                                            className="new-users-photo"
                                             src={
                                                 user.img_url ||
                                                 "default-user.jpeg"

@@ -29,18 +29,18 @@ form {
     justify-content: center;
 }
 .navbar {
-    width: 900px;
-    margin-top: 20px;
-    margin-left: 10px;
+    /* width: 900px; */
+    margin: 10px;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-gap: 50px;
+    grid-template-columns: repeat(8, 1fr);
+    grid-gap: 10px;
     align-items: center;
     text-align: center;
     cursor: pointer;
+    padding: 20px;
     text-decoration: none;
+    border-bottom: 2px double darkgray;
 }
-
 .chai-logo {
     width: 80px;
     height: 70px;
@@ -207,17 +207,20 @@ footer {
     right: 35px;
 }
 .profile-small-photo {
-    width: 70px;
-    height: 70px;
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
     position: absolute;
-    top: 25px;
-    right: 35px;
+    top: 105px;
+    right: 15px;
+    border: 2px solid rgb(138, 138, 138);
+    border-radius: 50%;
 }
 .modal-container {
     display: block;
     position: absolute;
-    top: 130px;
-    right: -76px;
+    top: 120px;
+    right: 30px;
 }
 .pic-upload-btn {
     margin-top: 5px;
@@ -276,8 +279,17 @@ footer {
 }
 .newusers-photo {
     align-items: center;
+    object-fit: contain;
+    width: 150px;
+    height: 200px;
 }
-
+.new-users-photo {
+    border: 2px solid black;
+    border-radius: 50%;
+    object-fit: contain;
+    width: 150px;
+    height: 150px;
+}
 .found-people-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -333,8 +345,9 @@ textarea {
 }
 
 .deleteprofile-img {
-    width: 180px;
-    height: 160px;
+    width: 150px;
+    height: 200px;
+    object-fit: contain;
 }
 .others-profile-container {
     align-items: center;

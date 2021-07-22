@@ -10,8 +10,8 @@ import OtherProfile from "./other-profile";
 import FindPeople from "./find-people";
 import Friends from "./friends";
 import Chat from "./chat";
-// import { Link } from "react-router-dom";
-import Menu from "./sidebar";
+import { Link } from "react-router-dom";
+// import Menu from "./sidebar";
 import DeleteAccount from "./deleteaccount";
 import Gallery from "./gallery";
 
@@ -76,25 +76,31 @@ export default class App extends React.Component {
             <div className="app-container">
                 <BrowserRouter>
                     <div>
-                        <img className="app-log" src="/Car Buddies.png" />
-                        <Menu></Menu>
-                        {/* <Link to="/">
-                            <img
-                                src="carbuddies.png"
-                                className="chai-logo"
-                            ></img>
-                        </Link>
-                        <Link to="/find/users" className="find-nav">
-                            Find People
-                        </Link>
-                        <Link to="/friends" className="find-nav">
-                            Friends-List
-                        </Link>
-                        <Link to="/chat">Message</Link>
-                        <a href="/logout" className="logout">
-                            Logout
-                        </a> */}
-
+                        {/* <Menu></Menu>*/}
+                        <nav className="navbar">
+                            <Link to="/">
+                                <img
+                                    src="carbuddies.png"
+                                    className="chai-logo"
+                                ></img>
+                            </Link>
+                            <Link to="/"> Home </Link>
+                            <Link to="/gallery" className="find-nav">
+                                {" "}
+                                Gallery{" "}
+                            </Link>
+                            <Link to="/find/users" className="find-nav">
+                                Find People
+                            </Link>
+                            <Link to="/friends" className="find-nav">
+                                Friends-List
+                            </Link>
+                            <Link to="/chat">Message</Link>
+                            <Link to="/delete-account"> Delete Account </Link>
+                            <a href="/logout" className="logout">
+                                Logout
+                            </a>
+                        </nav>
                         <ProfilePic
                             userId={this.state.userId}
                             first={this.state.first}
